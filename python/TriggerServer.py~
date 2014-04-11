@@ -1,0 +1,33 @@
+import socket
+
+
+
+def StartSocket(port):
+	run = False;
+
+	print("Running on port " + str(port))
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.bind(('localhost',port))
+	s.listen(5)
+	s.settimeout(10)	
+	
+	    	
+	while True:
+		connection, addr = s.accept()     # Establish connection with client.
+		print 'Got connection from', addr 
+		thread.start_new_thread(mouseHandler.MouseHandler,('t1',2)):		
+		run = run and False		     # Set whether recording should run or not
+		connection.send(str(run))	     	
+		connection.close()                # Close the connection
+		if not run:
+			break
+
+if __name__ == '__main__':
+
+	try:
+		port = int(sys.argv[1])
+	except IndexError:
+		port = 3000
+
+	StartSocket(port)
+	

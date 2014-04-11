@@ -1,0 +1,247 @@
+import json
+import threading
+import time
+import sys
+import utilities
+
+mice = ['mouse0','mouse1','mouse2','mouse3','mouse4',]
+coords = [0,0,0,0]
+
+
+class Mouse(threading.thread):
+
+	def idSelf(self,*args):
+		start = time.time()
+
+		if self.mouse != None:
+
+			status,dx,dy = tuple(ord(c) for c in self.mouse.read(3))
+			if dx != 0 or dy != 0:
+				self.id = self.number
+		
+			elif round(time.time()-start) > 10.0:
+				self.id =  -2
+				
+
+	def __init__(self,nr):
+		self.number = nr
+		self.prefix = '/dev/input/'
+		self.mouse = None
+				
+		try:
+			str1 = self.prefix + self.mice_[self.number]
+			self.mouse = file(str1)
+		except IOError:
+			utilities.FileHandler.logException("Mouse "+self.threadid+" was not found:"+str1)
+
+		self.id = -1
+		
+		super(Mouse,self).__init__()
+  	
+
+	
+		
+	
+			
+class IdMouse(Mouse):
+
+	pass
+
+		
+class SensorMouse(Mouse):
+
+	def __init__(self,identifier,nr):
+		self.ident = identifier		
+		super(SensorMouse,self).__init__()
+
+	def run(self):
+		global coords
+		while True:
+			status, dx, dy = tuple(ord(c) for c in self.mouse.read(3))
+			dx = utilities.toSigned(dx)
+			dy = utilities.toSigned(dy)
+					
+			if self.ident == 'm1':			
+				coords[0] = dx
+				coords[1] = dy
+			elif self.iden == 'm2':			
+				coords[2] = dx
+				coords[3] = dy
+		
+
+
+class TriggerMouse(Mouse):
+	
+	def __init__(self, _threshold):
+		self.timeReference = 0
+		self.triggered = False
+		self.threshold = _threshold
+		super().__init__(self)
+		readMouse()
+	
+	def readMouse():
+		while True:
+			status,dx,dy = tuple(ord(c) for c in self.read(3))
+			dx = toSigned(dx)
+			dy = toSigned(dy)
+	
+			if dx != 0 or dy != 0:
+				if(self.timeReference == 0):
+					self.timeReference = time.time() 
+								
+				self.triggered = True
+				
+				if not aboveThreshold():
+					self.triggerd = False
+					self.timeReference = 0
+
+	def aboveThreshold():
+		
+		return True 
+		
+class Fly(object):
+
+	def __init__(self):
+		#Position defined as [x,y,angle] where x and y are coordinates in the xy-plane
+		#and the angle is defined as the angle between the fly's direction and the y-axis 
+		self.position = [0,0,0]
+		
+
+	#Function for calculatiing ball rotation speed given tangential speeds for two points on the 		#ball.
+	###########################################################
+	#Input: c1 and c2 must be coordniate vectors of length 2
+	###########################################################
+	#Output: Returns forward, sideways and rotational velocity of the fly
+	def calcFlyVelocity(c1,c2):
+
+		ballVelFrwrd = (c1[1]+c2[1])*cos(y)
+		ballVelSide = (c1[1]+c2[1])*sin(y)
+		ballVelRot = (c1[0]+c2[0])/2
+
+		flyVelFrwrd = -ballVelFrwrd
+		flyVelSide = -ballVelSide
+		flyVelRot = ballVelRot
+
+		return flyVelFrwrd, flyVelSide, flyVelRot
+
+	#Update fly position given its velocity
+	def updatePosition(c1,c2):
+		velFrwrd, velSide, velRot = calcFlyVelocity(c1,c2)
+		
+		self.position[2] = self.position[2]+velRot*dt
+ 		self.position[1] = self.position[1]+velSide*sin(self.position[2])+velFrwrd*sin(self.position[2])
+		self.position[0] = self.position[0]+velSide*cos(self.position[2])-velFrwrd*sin(self.position[2])	
+ 					
+
+class Recording(object):
+
+	def __init__(self):
+		pass
+
+#Init each mouse
+def initMice(first,second):
+	mouse1_, mouse2_ = None,None
+	try:
+		str1 = '/dev/input/' + mice[first]
+	
+		mouse1_ = file(str1)
+	except IOError:
+		print "Mouse 2 was not found"
+		try:	
+			str2 = '/dev/input/'+mice[second]
+			mouse2_ = file(str2)
+		except IOError:
+			print "Mouse 1 was not found"
+	return mouse1_, mouse2_
+
+
+
+#Read mouse input, data that is retrieved is delta x and delta y values for the mouse
+def readMouse(m,thread,*args):
+	global coords
+	
+	while True:
+		status, dx, dy = tuple(ord(c) for c in m.read(3))
+		dx = toSigned(dx)
+		dy = toSigned(dy)
+		
+		if thread == 'thread1':
+			coords[0] = dx
+			coords[1] = dy                
+		elif thread == 'thread2':
+			coords[2] = dx
+			coords[2] = dy
+
+
+def readData():
+	m1,m2 = initMice(0,1)
+	global coords
+	#One thread for each mouse that listens for mouse data
+	try:
+		thread.start_new_thread(readMouse,(m1,'thread1',1))
+		#thread.start_new_thread(readMouse,(m2,'thread2',2))
+	except:
+		print "Error: unable to start thread"
+
+	#Temp code, breaks loop after 
+	t = 0
+	sum_ = 0
+	a = []
+	timestamp = []
+	start = time.time() 	
+	
+	while True:
+		sum_ = 0	
+		if sum(coords) < 0:
+			sum_ = -sum(coords)
+		else:
+			sum_ = sum(coords)
+				
+		if sum_ > 0:
+			a.append(t)
+			timestamp.append(time.time())
+
+		coords = [0,0,0,0]
+		t += 1
+		if t == 10000000:
+			break
+
+	end = time.time()
+	delta = end-start
+	print "ran for %d" % (delta)
+	return a,timestamp
+	
+def measure():
+    t0 = time.time()
+    t1 = t0
+    while t1 == t0:
+        t1 = time.time()
+    return (t0, t1, t1-t0)
+
+
+if __name__ == "__main__":
+	#samples = [measure() for i in range(10)]
+
+	#print reduce( lambda a,b:a+b, [measure()[2] for i in range(1000)], 0.0) / 1000.0	
+		
+	#s,a=readData()
+	m1,m2 = initMice(0,1)	
+	readMouse(m1,None,None)	
+	
+	#try:
+	#	f = open('/home/kristian/master_thesis/code/python/t.txt','w')
+	#	output = json.dumps(s)
+	#	output.replace('[','')
+	#	output.replace(']',',')
+	#	f.write(output)
+	#except IOError:
+	#	print "could not write to file"
+
+	#try:
+	#	f = open('/home/kristian/master_thesis/code/python/time.txt','w')
+	#	output = json.dumps(a)
+	#	output.replace('[','')
+	#	output.replace(']',',')
+	#	f.write(output)
+	#except IOError:
+	#	print "Could not write to file"

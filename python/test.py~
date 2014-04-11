@@ -1,0 +1,43 @@
+import threading
+
+def Consumer(threading.Thread):
+		
+	def __init__(self):
+
+		super(Consumer,self).__init__()
+
+	def run(self):
+		global condition
+		condition.aquire()
+	
+		while True:
+			if item:
+				break
+
+			condition.wait()
+
+		condition.release()
+
+def Producer(threading.Thread):
+		
+	def __init__(self):
+
+		super(Producer,self).__init__()
+
+	def run(self):
+		global condition
+		
+		condition.aquire()
+		condition.notify()
+		condition.release()
+
+		while True:
+			print 'doing something'
+
+condition = threading.Condition()
+
+p = Producer()
+
+t2 = Consumer()
+
+
