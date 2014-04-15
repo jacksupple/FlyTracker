@@ -1,6 +1,6 @@
 function [data] = readData(handles,filename, mode)
 %READDATA
-%Reads data from temporar data files and store it in appropriate manner.
+%Reads data from temporary data files and store it in appropriate manner.
 %The handles sent with it is that of the GUI so data also can be plotted in
 %the main window.
 %The filename is that of the file that all data will be written to
@@ -55,32 +55,18 @@ while running
                 for i=1:4
                     data{i,1} = [0];
                 end
-                
-%                 data{1,1} = [0];
-%                 data{2,1} = [0];
-%                 data{3,1} = [0];
-%                 data{4,1} = [0];
             else
                 
                 if isempty(data{1,1})
                     for k=1:4
                         data{k,1} = [fulldata{k,1},temp{k,1}];
                     end
-%                     data{1,1} = [fulldata{1,1},temp{1,1}];
-%                     data{2,1} = [fulldata{2,1},temp{2,1}];
-%                     data{3,1} = [fulldata{3,1},temp{3,1}];
-%                     data{4,1} = [fulldata{4,1},temp{4,1}];
                 else
                     index = size(data);                
                     
                     for j=1:4
                         data{j,index(2)+1} = [fulldata{j,1},temp{j,1}];
                     end
-                    
-%                     data{1,index(2)+1} = [fulldata{1,1},temp{1,1}];
-%                     data{2,index(2)+1} = [fulldata{2,1},temp{2,1}];
-%                     data{3,index(2)+1} = [fulldata{3,1},temp{3,1}];
-%                     data{4,index(2)+1} = [fulldata{4,1},temp{4,1}];
                 end
 
                 fulldata = cell(4,1);

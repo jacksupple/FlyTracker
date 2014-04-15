@@ -4,10 +4,7 @@ function [ data,concatdata ] = calcdata(output, mode_)
 %this. Returns data divided into blocks and the fully concatenated data
 %cell. The latter is used for plotting and is not saved.
 %*******************************************************
-%Precondition:
-%Input format
-%Blocks separated by "pause"
-%*******************************************************
+
 
 config = getappdata(0,'config');
 
@@ -15,8 +12,7 @@ starts = strfind(output,'{');
 ends = strfind(output,'}');
 len = length(starts);
 
-%dynamic values later
-
+%In calibration mode raw data should be used
 if strcmp(mode_,'calibration')
     alpha_ = 1;
     beta_ = 1;
@@ -24,6 +20,7 @@ else
     alpha_ = config.alpha_*-1;
     beta_ = config.beta_*-1;
 end
+
 omega = config.theta_;
 r = config.radius/2; %(mm) config.radius is not really radius but diameter
 
@@ -83,17 +80,13 @@ for i=1:len
     side(i) = w_m(1);
     forward(i) = w_m(2);
     
-    %%Scaling down small values
-%     if abs(w_mz)*180/pi < 1.5 %((abs(x1)+abs(x2))/2)-((abs(y1)+abs(y2))/2) < 10
-%         w_mz = w_mz*.2;        
-%     end
-    
     yaw(i) = w_mz;    
     times(i) = .1*time;
 end
+
     data{2,1} = side;
     data{1,1} = forward;
     data{3,1} = yaw;
     data{4,1} = times;
-    concatdata = data;    
+    concatdata = data;   
 end

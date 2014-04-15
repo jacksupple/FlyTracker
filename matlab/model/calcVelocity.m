@@ -30,8 +30,8 @@ function [velocities] = calcVelocity(data,block)
                 
     end
     
-    velocities{1,1} = forvel; %Convert to mm
-    velocities{2,1} = sidevel; %Convert to mm
+    velocities{1,1} = forvel;
+    velocities{2,1} = sidevel;
     velocities{3,1} = (180/pi).*yawvel; %Convert to degrees from rad
     velocities{4,1} = (1/1000).*data{4,block}; %Convert time to seconds
 end

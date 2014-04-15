@@ -1,8 +1,6 @@
-%Configuration class, singleton object that encapsulates configuration
-%parameters. 
 classdef Configuration < handle
-    %CONFIGURATION Summary of this class goes here
-    %   Detailed explanation goes here
+    %Configuration class, object that holds all information that needs to
+    %be stored between sessions but in particular all calibration values.
     
     properties (GetAccess = 'public',SetAccess = 'private')
         trigger;
