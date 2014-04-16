@@ -3,6 +3,7 @@ function [] = displaydata(data,handles,blocksize,toPlot)
 %   Detailed explanation goes here
 
     config = getappdata(0,'config');
+    config
     vel = get(handles.vel_menu,'Checked');
     cumpos = get(handles.cumpos,'Checked');
     deltapos = get(handles.dp_menu,'Checked');

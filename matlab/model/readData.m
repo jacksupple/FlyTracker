@@ -132,6 +132,15 @@ if ~isnan(fid)
     fclose(fid);
     
     if ~strcmp(mode,'calibration')
+        
+        config = getappdata(0,'config');
+        
+        if config.forwardAxis == 2
+            temp1 = data{1,1};
+            data{1,1} = data{2,1};
+            data{2,1} = temp1;
+        end
+        
         save(filename,'data');
         setappdata(0,'data',data);
 
