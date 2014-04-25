@@ -22,7 +22,7 @@ function varargout = host(varargin)
 
 % Edit the above text to modify the response to help host
 
-% Last Modified by GUIDE v2.5 27-Feb-2014 11:41:26
+% Last Modified by GUIDE v2.5 23-Apr-2014 10:18:53
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -140,4 +140,3 @@ function cancel_btn_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     close 'Network Settings';
-

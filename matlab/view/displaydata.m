@@ -31,35 +31,60 @@ function [] = displaydata(data,handles,blocksize,toPlot)
 
     %Plot for forward velocity, time x.001 to convert it to seconds
     block = blocksize(2);
-    plot(handles.axes1,.001.*fulldata{4,1},fulldata{config.forwardAxis,1});
+    %plot(handles.axes1,.001.*fulldata{4,1},fulldata{config.forwardAxis,1});
+    
+    if length(fulldata{4,1}) > 100
+    x = fulldata{4,1}(end-99:end);
+    
+    y1 = fulldata{config.forwardAxis,1}(end-99:end);
+    y2 = fulldata{config.sideAxis,1}(end-99:end);
+    y3 = fulldata{3,1}(end-99:end);
+    
+    else
+        x = fulldata{4,1};    
+        y1 = fulldata{config.forwardAxis,1};
+        y2 = fulldata{config.sideAxis,1};
+        y3 = fulldata{3,1};
+    end
+    
+    plot(handles.axes1,.001.*x,y1);
     title_ = strcat('Block',' ',num2str(block),': forward position');
     title(handles.axes1,title_);
-
+    axis(handles.axes1,'auto');
+    hold(handles.axes1,'on');
+    
     %Plot for sideway velocity, time x.001 to convert it to seconds
-    plot(handles.axes2,.001.*fulldata{4,1},fulldata{config.sideAxis,1});
+    %plot(handles.axes2,.001.*fulldata{4,1},fulldata{config.sideAxis,1});
+    plot(handles.axes2,.001.*x,y2);
     title_ = strcat('Block',' ',num2str(1),': sideway position');
     title(handles.axes2,title_);
-
+    axis(handles.axes2,'auto');
+    hold(handles.axes2,'on');
+    
     %Plot for yaw velocity, time x.001 to convert it to seconds
-    plot(handles.axes3,.001.*fulldata{4,1},fulldata{3,1});
+    %plot(handles.axes3,.001.*fulldata{4,1},fulldata{3,1});
+    plot(handles.axes3,.001.*x,y3);
     title_ = strcat('Block',' ',num2str(block),': angle position');
     title(handles.axes3,title_);
+    axis(handles.axes3,'auto');
     
-    if ~isempty(fulldata{1,1})
+    hold(handles.axes3,'on');
+    if ~isempty(fulldata{1,1}) & 1 < 0
         
         %Plot for yaw velocity
-        plot_dir(handles.axes4,y,x);
+        plot_dir(handles.axes4,x,y);
         title(handles.axes4,'2D-map');
         xlabel(handles.axes4,'Forward position (mm)');
         ylabel(handles.axes4,'Sideway position (mm)');
         
-        min_ = min(min(y,x));
-        max_ = max(max(y,x));
+        min_ = min(min(x),min(y));
+        max_ = max(max(x),max(y));
         
-        if ~isnan(min_) & ~isnan(max_) 
+        if ~isnan(min_) & ~isnan(max_) & min_ < max_ 
             axis([min_ max_ min_ max_]);
             axis square;
         end
+        
     end
     
     if strcmp(vel,'on')

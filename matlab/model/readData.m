@@ -99,7 +99,7 @@ while running
     size_ = size(data);
     
     if ~strcmp(mode,'calibration')
-        displaydata(fulldata,handles,size_,1);
+        %displaydata(fulldata,handles,size_,1);
     end
     
     if strfind(chunk,'kill')
