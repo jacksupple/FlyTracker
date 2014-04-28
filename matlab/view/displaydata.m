@@ -1,4 +1,4 @@
-function [] = displaydata(data,handles,blocksize,toPlot)
+function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
 %DISPLAYDATA Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -33,12 +33,12 @@ function [] = displaydata(data,handles,blocksize,toPlot)
     block = blocksize(2);
     %plot(handles.axes1,.001.*fulldata{4,1},fulldata{config.forwardAxis,1});
     
-    if length(fulldata{4,1}) > 100
-    x = fulldata{4,1}(end-99:end);
+    if length(fulldata{4,1}) > nrDatapoints
+    x = fulldata{4,1}(end-nrDatapoints+1:end);
     
-    y1 = fulldata{config.forwardAxis,1}(end-99:end);
-    y2 = fulldata{config.sideAxis,1}(end-99:end);
-    y3 = fulldata{3,1}(end-99:end);
+    y1 = fulldata{config.forwardAxis,1}(end-nrDatapoints+1:end);
+    y2 = fulldata{config.sideAxis,1}(end-nrDatapoints+1:end);
+    y3 = fulldata{3,1}(end-nrDatapoints+1:end);
     
     else
         x = fulldata{4,1};    
@@ -69,10 +69,11 @@ function [] = displaydata(data,handles,blocksize,toPlot)
     axis(handles.axes3,'auto');
     
     hold(handles.axes3,'on');
-    if ~isempty(fulldata{1,1}) & 1 < 0
+    if ~isempty(fulldata{1,1})
         
         %Plot for yaw velocity
-        plot_dir(handles.axes4,x,y);
+        %plot_dir(handles.axes4,x,y);
+        plot(handles.axes4,x,y);
         title(handles.axes4,'2D-map');
         xlabel(handles.axes4,'Forward position (mm)');
         ylabel(handles.axes4,'Sideway position (mm)');

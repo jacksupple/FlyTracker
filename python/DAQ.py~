@@ -28,7 +28,7 @@ class MouseHandler(threading.Thread):
 		self.mouseIDs = utilities.FileHandler.loadFromFile('mice.txt');
 		self.run_ = True
 		self.pause = False
-
+		self.start_ = 0
 		self.s1 = SensorMouse("sensor1",self.mouseIDs["sensor1"],self)
 		self.s2 = SensorMouse("sensor2",self.mouseIDs["sensor2"],self)
 		
@@ -37,7 +37,7 @@ class MouseHandler(threading.Thread):
 	def stop(self):
 		self.run_ = False;
 
-	#Overriden run-method, inefficient and should be revised. Dominated by pointless iterations due
+	#Overriden run-method, inefficient and should be revisited. Dominated by pointless iterations due
 	#to lack of good solution for pausing it from the outside. 
 	def run(self):
 		global coords
@@ -55,8 +55,6 @@ class MouseHandler(threading.Thread):
 			
 		except Exception:
 			utilities.FileHandler.logException(traceback.format_exc())
-		
-		start = time.time()
 		
 		flag = True #flag for determining whether blockmarker has been added or not
 		while self.run_:					
@@ -166,7 +164,7 @@ class socketHandler(threading.Thread):
 		super(socketHandler,self).__init__()
 
 	def run(self):
-		
+
 		try:
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			
@@ -182,6 +180,7 @@ class socketHandler(threading.Thread):
 		
 			if msg == 's':
 				self.handler.start()
+				self.handler.start_ = time.time()
 				utilities.FileHandler.saveToFile(time.ctime(),'blocktime.txt','append')
 			else:
 				print 'Not correct msg ',msg
@@ -201,6 +200,7 @@ class socketHandler(threading.Thread):
 					self.handler.pause = True
 				elif trigger == 's':
 					self.handler.pause = False
+					self.handler.start_ = time.time()
 					utilities.FileHandler.saveToFile(time.ctime(),'blocktime.txt','append')		
 		
 

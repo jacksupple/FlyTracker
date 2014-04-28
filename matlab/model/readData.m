@@ -13,8 +13,11 @@ tic;
 
 fid = NaN;
 
+freq = 100;
 running = true;
 setappdata(0,'running',running);
+size_ = [0,1];
+newBlock = false;
 
 output = '';
 p = getpath('tempdata.txt','data');
@@ -41,7 +44,7 @@ while running
     %100 is the number of samples plotted at the same time, slightly
     %arbitrary number but can be changed. Lower will mean a more continous
     %flow but demands more resources and vice versa
-    while a < 100
+    while a < freq
         a = a+1;
         chunk = fgets(fid);
         
@@ -49,6 +52,7 @@ while running
             break
         elseif strfind(chunk,'pause')
             [~,temp] = calcdata(output,mode);
+            newBlock = true
             
             if cumsum(fulldata{1,1}) == 0 | cumsum(fulldata{2,1}) == 0
                 errordlg('One of the sensors did not record any data so the current block was not saved');
@@ -77,6 +81,14 @@ while running
             
         if chunk ~= -1 
             output = strcat(output,chunk);
+            if newBlock
+                cla(handles.axes1);
+                cla(handles.axes2);
+                cla(handles.axes3);
+                cla(handles.axes4);
+                newBlock = false
+            end           
+            
         else
             %Pause to be able to listen for stop-btn as matlab lacks threading
             pause(0.001);
@@ -99,7 +111,7 @@ while running
     size_ = size(data);
     
     if ~strcmp(mode,'calibration')
-        %displaydata(fulldata,handles,size_,1);
+        displaydata(fulldata,handles,size_,1,freq);
     end
     
     if strfind(chunk,'kill')

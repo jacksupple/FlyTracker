@@ -28,7 +28,7 @@ class MouseHandler(threading.Thread):
 		self.mouseIDs = utilities.FileHandler.loadFromFile('mice.txt');
 		self.run_ = True
 		self.pause = False
-
+		self.start_ = 0
 		self.s1 = SensorMouse("sensor1",self.mouseIDs["sensor1"],self)
 		self.s2 = SensorMouse("sensor2",self.mouseIDs["sensor2"],self)
 		
@@ -56,8 +56,6 @@ class MouseHandler(threading.Thread):
 		except Exception:
 			utilities.FileHandler.logException(traceback.format_exc())
 		
-		start = time.time()
-		
 		flag = True #flag for determining whether blockmarker has been added or not
 		while self.run_:					
 			
@@ -73,7 +71,7 @@ class MouseHandler(threading.Thread):
 					temporary['y_2'] = temporary['y_2']+coordinates['y_2']
 					counter += 1
 				else:
-					temporary['t'] = int(round((time.time()-start)*10000))
+					temporary['t'] = int(round((time.time()-self.start_)*10000))
 					utilities.FileHandler.saveToFile(temporary,'tempdata.txt','append')
 					temporary = {"x_1":0,"y_1":0,"x_2":0,"y_2":0}
 					counter = 0
@@ -166,7 +164,7 @@ class socketHandler(threading.Thread):
 		super(socketHandler,self).__init__()
 
 	def run(self):
-		
+
 		try:
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			
@@ -182,6 +180,7 @@ class socketHandler(threading.Thread):
 		
 			if msg == 's':
 				self.handler.start()
+				self.handler.start_ = time.time()
 				utilities.FileHandler.saveToFile(time.ctime(),'blocktime.txt','append')
 			else:
 				print 'Not correct msg ',msg
@@ -201,6 +200,7 @@ class socketHandler(threading.Thread):
 					self.handler.pause = True
 				elif trigger == 's':
 					self.handler.pause = False
+					self.handler.start_ = time.time()
 					utilities.FileHandler.saveToFile(time.ctime(),'blocktime.txt','append')		
 		
 

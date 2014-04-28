@@ -544,10 +544,15 @@ function pop_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns pop contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from pop
     fulldata = getappdata(0,'data');
+    cla(handles.axes1);
+    cla(handles.axes2);
+    cla(handles.axes3);
+    cla(handles.axes4);
+ 
     if ~isempty(fulldata)
         block = get(handles.pop,'Value');
         size_ = size(fulldata);
-        displaydata(fulldata,handles,size_,block);    
+        displaydata(fulldata,handles,size_,block,length(fulldata{4,1}));    
     end
     
 % --- Executes during object creation, after setting all properties.
