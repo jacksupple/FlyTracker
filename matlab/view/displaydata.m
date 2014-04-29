@@ -3,7 +3,7 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
 %   Detailed explanation goes here
 
     config = getappdata(0,'config');
-    config
+    
     vel = get(handles.vel_menu,'Checked');
     cumpos = get(handles.cumpos,'Checked');
     deltapos = get(handles.dp_menu,'Checked');
@@ -34,20 +34,20 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     %plot(handles.axes1,.001.*fulldata{4,1},fulldata{config.forwardAxis,1});
     
     if length(fulldata{4,1}) > nrDatapoints
-    x = fulldata{4,1}(end-nrDatapoints+1:end);
+    x_ = fulldata{4,1}(end-nrDatapoints+1:end);
     
     y1 = fulldata{config.forwardAxis,1}(end-nrDatapoints+1:end);
     y2 = fulldata{config.sideAxis,1}(end-nrDatapoints+1:end);
     y3 = fulldata{3,1}(end-nrDatapoints+1:end);
     
     else
-        x = fulldata{4,1};    
+        x_ = fulldata{4,1};    
         y1 = fulldata{config.forwardAxis,1};
         y2 = fulldata{config.sideAxis,1};
         y3 = fulldata{3,1};
     end
     
-    plot(handles.axes1,.001.*x,y1);
+    plot(handles.axes1,.001.*x_,y1);
     title_ = strcat('Block',' ',num2str(block),': forward position');
     title(handles.axes1,title_);
     axis(handles.axes1,'auto');
@@ -55,7 +55,7 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     
     %Plot for sideway velocity, time x.001 to convert it to seconds
     %plot(handles.axes2,.001.*fulldata{4,1},fulldata{config.sideAxis,1});
-    plot(handles.axes2,.001.*x,y2);
+    plot(handles.axes2,.001.*x_,y2);
     title_ = strcat('Block',' ',num2str(1),': sideway position');
     title(handles.axes2,title_);
     axis(handles.axes2,'auto');
@@ -63,12 +63,13 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     
     %Plot for yaw velocity, time x.001 to convert it to seconds
     %plot(handles.axes3,.001.*fulldata{4,1},fulldata{3,1});
-    plot(handles.axes3,.001.*x,y3);
+    plot(handles.axes3,.001.*x_,y3);
     title_ = strcat('Block',' ',num2str(block),': angle position');
     title(handles.axes3,title_);
     axis(handles.axes3,'auto');
     
     hold(handles.axes3,'on');
+    
     if ~isempty(fulldata{1,1})
         
         %Plot for yaw velocity
