@@ -237,7 +237,8 @@ def runWithTimer(args):
 
 	utilities.FileHandler.saveToFile(time.ctime(),'blocktime.txt','append')
 	handler.start()
-	
+	handler.start_ = time.time()
+
 	time.sleep(int(args['time'])/1000)
 
 	handler.stop()	
@@ -250,7 +251,7 @@ def runWithoutTrigger(args):
 	handler = MouseHandler()
 	utilities.FileHandler.saveToFile(time.ctime(),'blocktime.txt','append')
 	handler.start()
-
+	handler.start_ = time.time()
 	#Reads from pipe as soon as anything is written it stops
 	open(pipe).read().strip()
 	handler.stop()
