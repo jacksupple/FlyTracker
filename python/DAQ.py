@@ -64,7 +64,7 @@ class MouseHandler(threading.Thread):
 				if not flag:
 					flag = True
 				
-				if counter < 4:
+				if counter < 2:
 					temporary['x_1'] = temporary['x_1']+coordinates['x_1']
 					temporary['x_2'] = temporary['x_2']+coordinates['x_2']
 					temporary['y_1'] = temporary['y_1']+coordinates['y_1']
@@ -170,7 +170,7 @@ class socketHandler(threading.Thread):
 			
 			s.bind(('',self.port)) #Using '' is prefferable compared to IP-address
 			s.listen(1)
-			s.settimeout(120)	
+			#s.settimeout(300)	
 			
 			print 'connection is running on localhost'
 			connection, addr = s.accept()     # Establish connection with client.

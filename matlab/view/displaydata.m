@@ -2,6 +2,7 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
 %DISPLAYDATA Summary of this function goes here
 %   Detailed explanation goes here
 
+
     config = getappdata(0,'config');
     
     vel = get(handles.vel_menu,'Checked');

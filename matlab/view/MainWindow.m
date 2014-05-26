@@ -132,6 +132,7 @@ function run_btn_Callback(hObject, eventdata, handles)
     %Check for runnable config file. Missing or incomplete configuration
     %will make it unusable
     if config.runnable
+        %reset_menu_item_Callback(hObject, eventdata, handles);
         if ~strcmp(config.pwd,'') && length(getappdata(0,'pass')) == 0
             setappdata(0,'pass',config.pwd);
         elseif strcmp(config.pwd,'') && length(getappdata(0,'pass')) == 0 
