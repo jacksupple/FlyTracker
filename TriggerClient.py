@@ -10,7 +10,7 @@ def sendTrigger(cmd):
         try:
 
                 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-                host = '130.238.33.38'
+                host = '130.238.33.123'
                 port = 4444
                 s.connect((host,port))
 
