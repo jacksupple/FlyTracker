@@ -81,9 +81,9 @@ class MouseHandler(threading.Thread):
 				coordinates['y_1'] = 0
 				coordinates['y_2'] = 0
 
-			if self.pause and flag:
-				utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
-				flag = False
+			#if self.pause and flag:
+			#	utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
+			#	flag = False
 	
 		
 	def addMouse(self,mouse):
@@ -196,8 +196,9 @@ class socketHandler(threading.Thread):
 
 				print 'Message rec: ',trigger
 
-				if trigger == 'p':
+				if trigger == 'p' or trigger == 'q':
 					self.handler.pause = True
+					utilities.FileHandler.saveToFile('pause','tempdata.txt','append')	
 				elif trigger == 's':
 					self.handler.pause = False
 					self.handler.start_ = time.time()
@@ -226,9 +227,7 @@ def runWithNetworkTrigger(args):
 	handler.start()
 
 	#Reads from pipe as soon as anything is read it stops and all daemon threads are closed aswell
-	open(pipe).read().strip()
-
-	
+	open(pipe).read().strip()	
 
 #Run DAQ with timer
 #Paramter time should be in ms
@@ -254,8 +253,7 @@ def runWithoutTrigger(args):
 	handler.start_ = time.time()
 	#Reads from pipe as soon as anything is written it stops
 	open(pipe).read().strip()
-	handler.stop()
-	
+	handler.stop()	
 
 #Function for parsing system args. 
 def parseArgs(args):

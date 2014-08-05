@@ -10,8 +10,8 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     deltapos = get(handles.dp_menu,'Checked');
     [x,y] = calc2DPath(data,1);
     
-    %Convert to degrees for usability purposes
-    data{3,1} = (180/pi).*data{3,1};
+    %Data is already in degrees
+    data{3,1} = data{3,1};%(180/pi).*data{3,1};
     fulldata = cell(4,1);
     
     %toPlot is the blocknumber that is to be plot, also this if-statement

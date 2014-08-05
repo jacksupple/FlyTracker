@@ -86,7 +86,7 @@ end
 
     data{2,1} = side;
     data{1,1} = forward;
-    data{3,1} = yaw;
+    data{3,1} = (180/pi).*yaw;
     data{4,1} = times;
     concatdata = data;   
 end

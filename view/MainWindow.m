@@ -132,6 +132,8 @@ function run_btn_Callback(hObject, eventdata, handles)
     %Check for runnable config file. Missing or incomplete configuration
     %will make it unusable
     if config.runnable
+        reset_menu_item_Callback(hObject, eventdata, handles);
+        
         %reset_menu_item_Callback(hObject, eventdata, handles);
         if ~strcmp(config.pwd,'') && length(getappdata(0,'pass')) == 0
             setappdata(0,'pass',config.pwd);
@@ -202,7 +204,7 @@ function stop_btn_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     stopAction(handles);
-
+    
 % --- Executes on key press with focus on stop_btn and none of its controls.
 function stop_btn_KeyPressFcn(hObject, eventdata, handles)
 % hObject    handle to stop_btn (see GCBO)
@@ -213,6 +215,7 @@ function stop_btn_KeyPressFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     if strcmp(eventdata.Key,'return')
         stopAction(handles);
+            
     end
     
 % --------------------------------------------------------------------
@@ -618,7 +621,6 @@ function vel_menu_Callback(hObject, eventdata, handles)
     setplotdescription(handles,titles,y_axis);
     pop_Callback(hObject, eventdata, handles)
             
-
 
 % --------------------------------------------------------------------
 function flydir_Callback(hObject, eventdata, handles)
