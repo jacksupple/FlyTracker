@@ -560,8 +560,7 @@ fulldata = getappdata(0,'data');
 
         block = get(handles.pop,'Value');
         size_ = size(fulldata);
-        displaydata(fulldata,handles,size_,block,length(fulldata{4,1}));    
-
+        displaydata(fulldata,handles,size_,block,length(fulldata{4,block}));    
     end
     
 % --- Executes during object creation, after setting all properties.

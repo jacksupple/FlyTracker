@@ -60,16 +60,21 @@ while running
                     data{i,1} = [0];
                 end
             else
-                
-                if isempty(data{1,1})
-                    for k=1:4
-                        data{k,1} = [fulldata{k,1},temp{k,1}];
-                    end
-                else
-                    index = size(data);                
-                    for j=1:4
-                        data{j,index(2)+1} = [fulldata{j,1},temp{j,1}];
-                    end
+                index = size(data);
+                %if isempty(data{1,1})
+%                 if index(2) == 1
+%                     for k=1:4
+%                         data{k,1} = [fulldata{k,1},temp{k,1}];
+%                     end
+%                 else                
+%                     for j=1:4
+%                         data{j,index(2)+1} = [fulldata{j,1},temp{j,1}];
+%                     end
+%                 end
+
+                for j=1:4
+                    data{j,index(2)} = [fulldata{j,1},temp{j,1}];
+                    data{j,index(2)+1} = [];
                 end
                 
                 fulldata = cell(4,1);
@@ -123,11 +128,13 @@ while running
     
 end 
 
-if isempty(data{1,1})
-    data = fulldata;
+% if isempty(data{1,1})
+%     data = fulldata;
+% end
+
+if isempty(data{5,end})
+    data = data(1:5,1:end-1);
 end
-
-
 
 %If recording was aborted before data could be recorded fid is NaN
 if ~isnan(fid) 
