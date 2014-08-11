@@ -24,7 +24,7 @@ p = getpath('tempdata.txt','data');
 
 %Init data cells
 fulldata = cell(4,1);
-data = cell(5,1);
+data = cell(6,1);
 
 while ~exist(p,'file') && running
     running = getappdata(0,'running');
@@ -76,9 +76,13 @@ while running
                     data{j,index(2)} = [fulldata{j,1},temp{j,1}];
                     data{j,index(2)+1} = [];
                 end
+                              
+                                
+                %Merges the corresponding stimuli (from flyfly) with the
+                %data
+                data{6,index(2)} = mergeClient();
                 
                 fulldata = cell(4,1);
-                
                 output = '';
             end
             break;
@@ -133,7 +137,7 @@ end
 % end
 
 if isempty(data{5,end})
-    data = data(1:5,1:end-1);
+    data = data(1:6,1:end-1);
 end
 
 %If recording was aborted before data could be recorded fid is NaN
