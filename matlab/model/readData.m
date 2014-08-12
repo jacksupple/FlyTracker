@@ -80,7 +80,7 @@ while running
                                 
                 %Merges the corresponding stimuli (from flyfly) with the
                 %data
-                data{6,index(2)} = mergeClient();
+                %data{6,index(2)} = mergeClient();
                 
                 fulldata = cell(4,1);
                 output = '';
