@@ -81,9 +81,9 @@ class MouseHandler(threading.Thread):
 				coordinates['y_1'] = 0
 				coordinates['y_2'] = 0
 
-			if self.pause and flag:
-				utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
-				flag = False
+			#if self.pause and flag:
+			#	utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
+			#	flag = False
 	
 		
 	def addMouse(self,mouse):
@@ -196,8 +196,15 @@ class socketHandler(threading.Thread):
 
 				print 'Message rec: ',trigger
 
-				if trigger == 'p' or trigger == 'q':
+				#if trigger == 'p' or trigger == 'q':
+					#self.handler.pause = True
+					#utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
+				if trigger == 'p'
 					self.handler.pause = True
+					utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
+				elif trigger == 'q':
+					self.handler.pause = True
+					utilities.FileHandler.saveToFile('quit','tempdata.txt','append')	
 				elif trigger == 's':
 					self.handler.pause = False
 					self.handler.start_ = time.time()

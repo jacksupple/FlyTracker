@@ -50,7 +50,7 @@ while running
         
         if strfind(chunk,'kill')
             break
-        elseif strfind(chunk,'pause')
+        elseif strfind(chunk,'pause')% | strfind(chunk,'quit')
             [~,temp] = calcdata(output,mode);
             newBlock = true;
             
@@ -79,8 +79,10 @@ while running
                               
                                 
                 %Merges the corresponding stimuli (from flyfly) with the
-                %data
-                %data{6,index(2)} = mergeClient();
+                %data only if it was a quit rather than a pause
+                %if strfind(chunk,'quit')
+                    %data{6,index(2)} = mergeClient();
+                %end
                 
                 fulldata = cell(4,1);
                 output = '';
