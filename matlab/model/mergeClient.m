@@ -5,7 +5,7 @@ function [message] = mergeClient(~)
     import java.net.Socket
     import java.io.*
     
-    port = 4449;
+    port = 5004;
     host = '130.238.33.123';
     number_of_retries = 20;
 
@@ -34,14 +34,14 @@ function [message] = mergeClient(~)
             d_input_stream = DataInputStream(input_stream);
             
             % read data from the socket - wait a short time first
-            pause(0.5);
+            pause(2);
             bytes_available = input_stream.available;
             fprintf(1, 'Reading %d bytes\n', bytes_available);
             
             message = zeros(1, bytes_available, 'uint8');
             
             for i = 1:(bytes_available/8)
-                message(i) = d_input_stream.readLong;
+                message(i) = d_input_stream.readDouble;
             end
             
             message = deserialize(transpose(message))

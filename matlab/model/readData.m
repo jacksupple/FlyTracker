@@ -81,7 +81,14 @@ while running
                 %Merges the corresponding stimuli (from flyfly) with the
                 %data only if it was a quit rather than a pause
                 %if strfind(chunk,'quit')
-                    %data{6,index(2)} = mergeClient();
+                    %stim = mergeClient();
+                    %debug = mergeClient();
+                    %rest = mergeClient();
+                    %toSave = struct;
+                    %toSave.stim = stim;
+                    %toSave.debug = debug;
+                    %toSave.rest = rest;
+                    %data{6,index(2)} = toSave;
                 %end
                 
                 fulldata = cell(4,1);
