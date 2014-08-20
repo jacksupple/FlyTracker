@@ -163,6 +163,9 @@ if isempty(data{5,end})
     data = data(1:6,1:end-1);
 end
 
+
+%data = corrData(data);
+
 %If recording was aborted before data could be recorded fid is NaN
 if ~isnan(fid) 
     fclose(fid);
