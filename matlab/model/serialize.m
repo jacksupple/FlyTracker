@@ -27,7 +27,7 @@ function m = serialize(v)
 % By Tim Hutt, 19/11/2010
 %
 % Updated 16/12/2010 - Fix bug with matrices.
-
+    v
 	if isnumeric(v) || islogical(v) || ischar(v) % Matrix type thing.
 		m = serializeMatrix(v);
 	elseif isstruct(v)
