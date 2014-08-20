@@ -50,7 +50,35 @@ while running
         
         if strfind(chunk,'kill')
             break
-        elseif strfind(chunk,'pause')% | strfind(chunk,'quit')
+        elseif strfind(chunk,'quit')
+            [~,temp] = calcdata(output,mode);
+            newBlock = true;
+            
+            if cumsum(fulldata{1,1}) == 0 | cumsum(fulldata{2,1}) == 0
+                errordlg('One of the sensors did not record any data so the current block was not saved');
+                for i=1:4
+                    data{i,1} = [0];
+                end
+            else
+                index = size(data);
+                
+                for j=1:4
+                    data{j,index(2)} = [fulldata{j,1},temp{j,1}];
+                    data{j,index(2)+1} = [];
+                end
+                              
+                                
+                %Merges the corresponding stimuli (from flyfly) with the
+                %data only if it was a quit rather than a pause
+                stim = mergeClient(10000);
+                
+                data{6,index(2)} = stim;
+                
+                fulldata = cell(4,1);
+                output = '';
+            end
+            break;
+        elseif strfind(chunk,'pause')
             [~,temp] = calcdata(output,mode);
             newBlock = true;
             
@@ -77,20 +105,6 @@ while running
                     data{j,index(2)+1} = [];
                 end
                               
-                                
-                %Merges the corresponding stimuli (from flyfly) with the
-                %data only if it was a quit rather than a pause
-                %if strfind(chunk,'quit')
-                    %stim = mergeClient();
-                    %debug = mergeClient();
-                    %rest = mergeClient();
-                    %toSave = struct;
-                    %toSave.stim = stim;
-                    %toSave.debug = debug;
-                    %toSave.rest = rest;
-                    %data{6,index(2)} = toSave;
-                %end
-                
                 fulldata = cell(4,1);
                 output = '';
             end

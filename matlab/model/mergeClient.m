@@ -1,11 +1,11 @@
-function [message] = mergeClient(~)
+function [message] = mergeClient(port)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
     
     import java.net.Socket
     import java.io.*
     
-    port = 5004;
+    %port = 5004;
     host = '130.238.33.123';
     number_of_retries = 20;
 
