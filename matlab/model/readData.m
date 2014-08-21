@@ -68,10 +68,9 @@ while running
                 end
                               
                                 
-                %Merges the corresponding stimuli (from flyfly) with the
-                %data only if it was a quit rather than a pause
-                stim = mergeClient(10000);
-                
+                if getappdata(0,'merge')
+                    stim = mergeClient(10000);
+                end
                 data{6,index(2)} = stim;
                 
                 fulldata = cell(4,1);
@@ -163,8 +162,9 @@ if isempty(data{5,end})
     data = data(1:6,1:end-1);
 end
 
-
-%data = corrData(data);
+%if getappdata(0,'merge')
+    %data = corrData(data);
+%end
 
 %If recording was aborted before data could be recorded fid is NaN
 if ~isnan(fid) 

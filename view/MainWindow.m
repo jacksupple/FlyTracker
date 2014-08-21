@@ -22,7 +22,7 @@ function varargout = MainWindow(varargin)
 
 % Edit the above text to modify the response to help MainWindow
 
-% Last Modified by GUIDE v2.5 09-Apr-2014 15:37:18
+% Last Modified by GUIDE v2.5 21-Aug-2014 18:10:20
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -655,3 +655,13 @@ function translation_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     TranslationCal('notsetup');
+
+
+% --- Executes on button press in cbmerge.
+function cbmerge_Callback(hObject, eventdata, handles)
+% hObject    handle to cbmerge (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of cbmerge
+    setappdata(0,'merge',get(hObject,'Value'));

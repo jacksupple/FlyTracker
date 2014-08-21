@@ -4,6 +4,11 @@ function [data] = corrData(data)
 
 size_ = size(data);
 
+%Checking each datablock if there is a parameter file associated with it,
+%if not it means that the later one has the parameter for the current
+%block. %When parameters are split, it only separate the oldest block as it
+%is done iteratively backwards so that there is no need to keep track of
+%how many blocks there might be in one param file
 for i=size_(2):-1:1
     if isempty(data{6,i})
         data = splitParams(data,i);
@@ -12,6 +17,7 @@ end
 
 end
 
+%separate the last block of the parameter variable. Return the updated 
 function [data] = splitParams(data,index)
 
     param = data{6,index+1};
