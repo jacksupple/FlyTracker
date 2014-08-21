@@ -67,10 +67,9 @@ while running
                     data{j,index(2)+1} = [];
                 end
                               
-                                
-                if getappdata(0,'merge')
+                 %if getappdata(0,'merge')
                     stim = mergeClient(10000);
-                end
+                %end
                 data{6,index(2)} = stim;
                 
                 fulldata = cell(4,1);
@@ -158,12 +157,12 @@ end
 %     data = fulldata;
 % end
 
-if isempty(data{5,end})
+if isempty(data{5,end})% || data{5,end} == -1
     data = data(1:6,1:end-1);
 end
 
 %if getappdata(0,'merge')
-    %data = corrData(data);
+    data = corrData(data);
 %end
 
 %If recording was aborted before data could be recorded fid is NaN

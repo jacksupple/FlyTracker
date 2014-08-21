@@ -39,12 +39,15 @@ function [message] = mergeClient(port)
             fprintf(1, 'Reading %d bytes\n', bytes_available);
             
             message = zeros(1, bytes_available, 'uint8');
-            
-            for i = 1:(bytes_available/8)
+            i = 1;
+            while input_stream.available > 0
+            %for i = 1:(bytes_available/8)
+                %input_stream.available
                 message(i) = d_input_stream.readDouble;
+                i = i+1;
             end
             
-            message = deserialize(transpose(message))
+            input_socket.close;
             
             % cleanup
             input_socket.close;
@@ -60,6 +63,10 @@ function [message] = mergeClient(port)
             pause(1);
         end
     end
+    
+    message = deserialize(transpose(message));
+    disp(message);
+            
 
 end
 

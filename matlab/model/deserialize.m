@@ -175,8 +175,12 @@ function [v, pos] = deserializeStruct(m, pos)
 	v = [];
 	for ii = 1:nels
 		for ff = 1:nfields
-			[v(ii).(fieldNames{ff}), pos] = deserialize(m, pos);
-		end
+            %fieldNames{ff}
+            if ~isempty(fieldNames{ff})
+            	[v(ii).(fieldNames{ff}), pos] = deserialize(m, pos);
+            end
+        end
+            
 	end
 	v = reshape(v, [dms 1 1]);
 

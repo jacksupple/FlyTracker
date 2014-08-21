@@ -201,7 +201,7 @@ class socketHandler(threading.Thread):
 					utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
 				elif trigger == 'q':
 					self.handler.pause = True
-					utilities.FileHandler.saveToFile('pause','tempdata.txt','append')	
+					utilities.FileHandler.saveToFile('quit','tempdata.txt','append')	
 				elif trigger == 's':
 					self.handler.pause = False
 					self.handler.start_ = time.time()

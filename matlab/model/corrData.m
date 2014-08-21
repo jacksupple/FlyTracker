@@ -43,10 +43,10 @@ function [data] = splitParams(data,index)
                     %separated from each other. All other parameters are
                     %kept for each block
                     currentBlock.debug.stimulus.layers(k).settings = currentBlock.debug.stimulus.layers(k).settings(1:j); 
-                    prevBlock.debug.stimulus.layers(k).settings = prevBlock.debug.stimulus.layers(k).settings(1:j); 
+                    prevBlock.debug.stimulus.layers(k).settings = prevBlock.debug.stimulus.layers(k).settings(j+1:end); 
                     
                     currentBlock.stim.layers(k).settings = currentBlock.stim.layers(k).settings(1:j); 
-                    prevBlock.stim.layers(k).settings = prevBlock.stim.layers(k).settings(1:j); 
+                    prevBlock.stim.layers(k).settings = prevBlock.stim.layers(k).settings(j+1:end); 
                                         
                     currentBlock.stim.layers(k).Param = currentBlock.stim.layers(k).Param(1:j);
                     prevBlock.stim.layers(k).Param = prevBlock.stim.layers(k).Param(j+1:end);
