@@ -159,7 +159,7 @@ class socketHandler(threading.Thread):
 	def __init__(self,p):
 		self.port = p
 		self.handler = MouseHandler()
-		self.handler.setDaemon(True) #Setting thread to daemon means its terminated as all non-threads are terminated (not a clean exit)
+		self.handler.setDaemon(True) #Setting thread to daemon means its terminated as all non-threads are terminated
 
 		super(socketHandler,self).__init__()
 
@@ -196,9 +196,6 @@ class socketHandler(threading.Thread):
 
 				print 'Message rec: ',trigger
 
-				#if trigger == 'p' or trigger == 'q':
-				#	self.handler.pause = True
-				#	utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
 				if trigger == 'p':
 					self.handler.pause = True
 					utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
