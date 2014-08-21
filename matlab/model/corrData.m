@@ -1,6 +1,7 @@
 function [data] = corrData(data)
 %Function for correlating blocks of data to the corresponding parameter
-%file. 
+%file. The function is dependent on the flyfly implmentation of the visual
+%parameters. 
 
 size_ = size(data);
 
@@ -32,11 +33,15 @@ function [data] = splitParams(data,index)
     prevBlock = param;
     done = false;
     
+    %Go through each layer and trial to look for breaks.
     for i=1:numLayers
         for j=numTrials-1:-1:1
             if param.stim.layers(i).Param(j).PauseTime > 0
                 
                 for k=1:numLayers
+                    %This is where the block specific parameters are
+                    %separated from each other. All other parameters are
+                    %kept for each block
                     currentBlock.debug.stimulus.layers(k).settings = currentBlock.debug.stimulus.layers(k).settings(1:j); 
                     prevBlock.debug.stimulus.layers(k).settings = prevBlock.debug.stimulus.layers(k).settings(1:j); 
                     

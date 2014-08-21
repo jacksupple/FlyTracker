@@ -656,7 +656,6 @@ function translation_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     TranslationCal('notsetup');
 
-
 % --- Executes on button press in cbmerge.
 function cbmerge_Callback(hObject, eventdata, handles)
 % hObject    handle to cbmerge (see GCBO)
