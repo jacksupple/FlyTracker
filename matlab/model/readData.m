@@ -67,7 +67,7 @@ while running
                     data{j,index(2)+1} = [];
                 end
                               
-                 %if getappdata(0,'merge')
+                %if getappdata(0,'merge')
                     stim = mergeClient(10000);
                 %end
                 data{6,index(2)} = stim;
@@ -163,6 +163,7 @@ end
 
 %if getappdata(0,'merge')
     data = corrData(data);
+    data = reformatData(data);
 %end
 
 %If recording was aborted before data could be recorded fid is NaN
