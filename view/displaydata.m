@@ -19,7 +19,6 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     if strcmp(vel,'on')
         fulldata = calcVelocity(data,toPlot);
     elseif strcmp(cumpos,'on')
-        
         fulldata{1,1} = cumsum(data{1,toPlot});
         fulldata{2,1} = cumsum(data{2,toPlot});
         fulldata{3,1} = cumsum(data{3,toPlot});

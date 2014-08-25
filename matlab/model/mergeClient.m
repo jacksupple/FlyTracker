@@ -41,8 +41,6 @@ function [message] = mergeClient(port)
             message = zeros(1, bytes_available, 'uint8');
             i = 1;
             while input_stream.available > 0
-            %for i = 1:(bytes_available/8)
-                %input_stream.available
                 message(i) = d_input_stream.readDouble;
                 i = i+1;
             end
@@ -66,7 +64,5 @@ function [message] = mergeClient(port)
     
     message = deserialize(transpose(message));
     disp(message);
-            
-
 end
 

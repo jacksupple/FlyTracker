@@ -161,10 +161,12 @@ if isempty(data{5,end})% || data{5,end} == -1
     data = data(1:6,1:end-1);
 end
 
+%If merging is activated the data file should be correlated with its
+%corresponding parameter data retrieved from flyfly. 
 %if getappdata(0,'merge')
     data = corrData(data);
-    data = reformatData(data);
 %end
+data = reformatData(data);
 
 %If recording was aborted before data could be recorded fid is NaN
 if ~isnan(fid) 

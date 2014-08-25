@@ -135,9 +135,9 @@ function run_btn_Callback(hObject, eventdata, handles)
         reset_menu_item_Callback(hObject, eventdata, handles);
         
         %reset_menu_item_Callback(hObject, eventdata, handles);
-        if ~strcmp(config.pwd,'') && length(getappdata(0,'pass')) == 0
+        if ~strcmp(config.pwd,'') && isempty(getappdata(0,'pass'))
             setappdata(0,'pass',config.pwd);
-        elseif strcmp(config.pwd,'') && length(getappdata(0,'pass')) == 0 
+        elseif strcmp(config.pwd,'') && ismepty(getappdata(0,'pass')) 
             PwQuery;
         end
         
@@ -547,17 +547,13 @@ function pop_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns pop contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from pop
-   
-fulldata = getappdata(0,'data');
-   cla(handles.axes1);
-   cla(handles.axes2);
-   cla(handles.axes3);
-   cla(handles.axes4);  
-
-
+    fulldata = getappdata(0,'data');
+    cla(handles.axes1);
+    cla(handles.axes2);
+    cla(handles.axes3);
+    cla(handles.axes4);
 
     if ~isempty(fulldata)
-
         block = get(handles.pop,'Value');
         size_ = size(fulldata);
         displaydata(fulldata,handles,size_,block,length(fulldata{4,block}));    
@@ -619,8 +615,7 @@ function vel_menu_Callback(hObject, eventdata, handles)
     y_axis = {'Velocity (m/s)','Velocity (m/s)','Velocity (degrees/s)'};
     setplotdescription(handles,titles,y_axis);
     pop_Callback(hObject, eventdata, handles)
-            
-
+        
 % --------------------------------------------------------------------
 function flydir_Callback(hObject, eventdata, handles)
 % hObject    handle to flydir (see GCBO)
@@ -628,14 +623,12 @@ function flydir_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     SetupSettings('notsetup');   
 
-
 % --------------------------------------------------------------------
 function yawrot_Callback(hObject, eventdata, handles)
 % hObject    handle to yawrot (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     Calibration('notsetup');
-
 
 % --- Executes on key press with focus on run_btn and none of its controls.
 function run_btn_KeyPressFcn(hObject, eventdata, handles)
