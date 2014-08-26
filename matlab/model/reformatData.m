@@ -7,6 +7,7 @@ size_ = size(data);
 %Iterate over each block in the data file
 for k=1:size_(2)
 
+    %% If the block is empty there is no need to reformat
     if ~isempty(data{1,k})
         data_time = data{4,k};
         data_forward = data{1,k};
@@ -22,7 +23,9 @@ for k=1:size_(2)
 
         totTime = 0;
 
-        %Find total stimuli time by adding pre-, post- and stimtime thogether
+        %% Find total stimuli time by adding pre-, post- and stimtime
+        %% thogether and use the layer with the longest one as that is what
+        %% defines the length of the trial
         for i=1:numLayers
             for j=1:numTrials
                 tempTime = param.stim.layers(i).Param(j).Time+param.stim.layers(i).Param(j).PreStimTime+param.stim.layers(i).Param(j).PostStimTime;
@@ -47,8 +50,8 @@ for k=1:size_(2)
         counter=find(data_time);
         time_vector(round(data_time(counter))+1)=(data_time(counter));
 
-        % Karin edit May'2014 (first element ==0)
-        % Olga edit June'2014 (new counter)
+        %% Karin edit May'2014 (first element ==0)
+        %% Olga edit June'2014 (new counter)
         if data_time(1)==0
             forward(round(data_time(counter))+1) = data_forward(2:length(data_forward)); %put a forward position in a right place in forward vector
             ss(round(data_time(counter))+1) = data_ss(2:length(data_ss)); %put a ss position in a right place in forward vector
@@ -60,6 +63,7 @@ for k=1:size_(2)
             yaw(round(data_time(counter))+1) = data_yaw;
         end
 
+        %% Update the data
         data{1,k} = forward;
         data{2,k} = ss;
         data{3,k} = yaw;

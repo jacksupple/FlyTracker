@@ -87,17 +87,7 @@ while running
                 end
             else
                 index = size(data);
-                %if isempty(data{1,1})
-%                 if index(2) == 1
-%                     for k=1:4
-%                         data{k,1} = [fulldata{k,1},temp{k,1}];
-%                     end
-%                 else                
-%                     for j=1:4
-%                         data{j,index(2)+1} = [fulldata{j,1},temp{j,1}];
-%                     end
-%                 end
-
+                
                 for j=1:4
                     data{j,index(2)} = [fulldata{j,1},temp{j,1}];
                     data{j,index(2)+1} = [];

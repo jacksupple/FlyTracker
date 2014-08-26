@@ -1,6 +1,5 @@
 function ip = getIPAddress()
     %Simple function for finding ip address of localhost.
-    %
     %Returns IP address as string
     
     [~,result] = system('ifconfig');

@@ -1,25 +1,29 @@
 function [message] = mergeClient(port)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%This is a client application that reads and the converts the parameter
+%data sent from flyfly. If flyfly is not used as software for generating
+%visual stimuli the following demands are set on the parameter format:
+%Struct object with fields that are either struct, numerical, logical or
+%function handle
     
     import java.net.Socket
     import java.io.*
     
-    %port = 5004;
+    %Make sure this is the same host address as the computer that holds
+    %flyfly
     host = '130.238.33.123';
+    
     number_of_retries = 20;
-
     retry = 0;
     input_socket = [];
     message = [];
 
     fprintf(1,'Connecting to FlyFly...\n');
     
+    %% Opens up a socket that reads the parameter data
     while true
        
         retry = retry + 1;
-        
-        
+                
         if ((number_of_retries > 0) && (retry > number_of_retries))
             fprintf(1, 'Too many retries\n');
             break;
@@ -34,7 +38,7 @@ function [message] = mergeClient(port)
             d_input_stream = DataInputStream(input_stream);
             
             % read data from the socket - wait a short time first
-            pause(2);
+            %pause(2);
             bytes_available = input_stream.available;
             fprintf(1, 'Reading %d bytes\n', bytes_available);
             
@@ -49,6 +53,7 @@ function [message] = mergeClient(port)
             
             % cleanup
             input_socket.close;
+            disp('Parameter merging was successfull!');
             break;
              
         catch e
@@ -65,4 +70,3 @@ function [message] = mergeClient(port)
     message = deserialize(transpose(message));
     disp(message);
 end
-

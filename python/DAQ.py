@@ -90,7 +90,7 @@ class MouseHandler(threading.Thread):
 		self.sensors.append(mouse)
 
 
-#Super class to teh different mouse classes. 
+#Super class to the different mouse classes. 
 class AbstractMouse(threading.Thread):
 
 	def __init__(self,nr,handler):
@@ -280,4 +280,3 @@ if __name__ == '__main__':
 
 	#Launch provided function label
 	functions[args['function']](args)
-	print 'quit'

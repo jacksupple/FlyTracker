@@ -89,7 +89,6 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
             axis([min_ max_ min_ max_]);
             axis square;
         end
-        
     end
     
     if strcmp(vel,'on')

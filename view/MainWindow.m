@@ -245,7 +245,6 @@ function confgiure_menu_item_Callback(hObject, eventdata, handles)
 % hObject    handle to confgiure_menu_item (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    
     if exist('config.mat','file') == 2
         button = questdlg('Are you sure you want to configure the system? Finishing it will overwrite the current one.');
         
