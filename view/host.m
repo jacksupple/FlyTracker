@@ -66,7 +66,7 @@ config = getappdata(0,'config')
 set(handles.edit1,'String',config.port);
 set(handles.text1,'String',getIPAddress);
 
-%Code to get host name
+%Code to retrieve host name
 mark = 'name = ';
 arg = ['nslookup ',getIPAddress];
 [~,out] = system(arg);
@@ -129,10 +129,6 @@ function ok_btn_Callback(hObject, eventdata, handles)
     else
         errordlg('Not a valid port number, you must enter an integer between 1024 and 65000');
     end
-    
-    
-    
-    
     
 % --- Executes on button press in cancel_btn.
 function cancel_btn_Callback(hObject, eventdata, handles)

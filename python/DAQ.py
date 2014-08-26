@@ -80,12 +80,7 @@ class MouseHandler(threading.Thread):
 				coordinates['x_2'] = 0
 				coordinates['y_1'] = 0
 				coordinates['y_2'] = 0
-
-			#if self.pause and flag:
-			#	utilities.FileHandler.saveToFile('pause','tempdata.txt','append')
-			#	flag = False
 	
-		
 	def addMouse(self,mouse):
 		self.sensors.append(mouse)
 
