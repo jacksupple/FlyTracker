@@ -1,6 +1,6 @@
 function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
-%DISPLAYDATA Summary of this function goes here
-%   Detailed explanation goes here
+%DISPLAYDATA Function that displays the data which is provided as input to
+%the function. Assumes that there are axes-handles. 
 
 
     config = getappdata(0,'config');
@@ -45,8 +45,7 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
         y1 = fulldata{config.forwardAxis,1};
         y2 = fulldata{config.sideAxis,1};
         y3 = fulldata{3,1};
-    end
-    
+    end    
     
     plot(handles.axes1,.001.*x_,y1);
     title_ = strcat('Block',' ',num2str(block),': forward position');
@@ -56,8 +55,6 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     
     
     %Plot for sideway velocity, time x.001 to convert it to seconds
-    %plot(handles.axes2,.001.*fulldata{4,1},fulldata{config.sideAxis,1});
-    
     plot(handles.axes2,.001.*x_,y2);
     title_ = strcat('Block',' ',num2str(1),': sideway position');
     title(handles.axes2,title_);
@@ -65,7 +62,6 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     hold(handles.axes2,'on');
     
     %Plot for yaw velocity, time x.001 to convert it to seconds
-    %plot(handles.axes3,.001.*fulldata{4,1},fulldata{3,1});
     plot(handles.axes3,.001.*x_,y3);
     title_ = strcat('Block',' ',num2str(block),': angle position');
     title(handles.axes3,title_);
@@ -75,8 +71,6 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     
     %if ~isempty(fulldata{1,1})
         
-        %Plot for yaw velocity
-        %plot_dir(handles.axes4,x,y);
         plot(handles.axes4,x,y);
         title(handles.axes4,'2D-map');
         xlabel(handles.axes4,'Forward position (mm)');
