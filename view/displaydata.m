@@ -69,7 +69,7 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     
     hold(handles.axes3,'on');
     
-    %if ~isempty(fulldata{1,1})
+    if ~isempty(fulldata{1,1})
         
         plot(handles.axes4,x,y);
         title(handles.axes4,'2D-map');
@@ -79,11 +79,11 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
         min_ = min(min(x),min(y));
         max_ = max(max(x),max(y));
         
-        %if ~isnan(min_) & ~isnan(max_) & min_ < max_ 
+        if ~isnan(min_) & ~isnan(max_) & min_ < max_ 
             axis([min_ max_ min_ max_]);
             axis square;
-        %end
-    %end
+        end
+    end
     
     if strcmp(vel,'on')
         titles = {'Forward velocity','Sideway velocity','Yaw velocity'};

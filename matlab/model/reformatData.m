@@ -1,12 +1,13 @@
 function [data] = reformatData(data)
 %Reformats the data such data the time interval between each datapoint is
+%Reformats the data such data the time intervall between each datapoint is
 %made equal
 
 size_ = size(data);
 
 %Iterate over each block in the data file
 for k=1:size_(2)
-
+    
     %% If the block is empty there is no need to reformat
     if ~isempty(data{1,k})
         data_time = data{4,k};
@@ -15,6 +16,7 @@ for k=1:size_(2)
         data_yaw = data{3,k};
         param = data{6,k};
 
+        %%Find stimuli time
         tempSize = size(param.stim.layers);
         numLayers = tempSize(2);
 
@@ -36,7 +38,8 @@ for k=1:size_(2)
         end
 
         %Convert from frames/s to ms
-        stimuli_time = totTime*1000/160;
+        frameRate = data{6,k}.debug.screenData.hz-1;
+        stimuli_time = ceil(totTime*1000/frameRate);
 
         %% zeros-vectors creation based on stimuli time
         time_vector = zeros(1,stimuli_time);
@@ -52,6 +55,8 @@ for k=1:size_(2)
 
         %% Karin edit May'2014 (first element ==0)
         %% Olga edit June'2014 (new counter)
+        % Karin edit May'2014 (first element ==0)
+        % Olga edit June'2014 (new counter)
         if data_time(1)==0
             forward(round(data_time(counter))+1) = data_forward(2:length(data_forward)); %put a forward position in a right place in forward vector
             ss(round(data_time(counter))+1) = data_ss(2:length(data_ss)); %put a ss position in a right place in forward vector

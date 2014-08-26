@@ -37,9 +37,10 @@ function [message] = mergeClient(port)
             input_stream   = input_socket.getInputStream;
             d_input_stream = DataInputStream(input_stream);
             
+            pause(2);
             % read data from the socket - wait a short time first
-            %pause(2);
             bytes_available = input_stream.available;
+                        
             fprintf(1, 'Reading %d bytes\n', bytes_available);
             
             message = zeros(1, bytes_available, 'uint8');
