@@ -1,3 +1,4 @@
+import os
 import json
 import time
 
@@ -20,7 +21,19 @@ class FileHandler:
 	def saveToFile(toSave,fileName,*args):
 		e = 'w'
 		global path_data
+		fname = path_data+fileName		
+		
+		filecounter = 1
 
+		#while os.path.getsize(fname) > 2000000:
+		#	idx = temp.find('.')
+
+		#	predot = fname[0:idx-1]
+		#	postdot = fname[idx:len(fname)]
+			
+		#	fname = predot+str(filecounter)+postdot
+		
+		
 		for arg in args:
 			e = arg		
 			

@@ -67,10 +67,10 @@ while running
                     data{j,index(2)+1} = [];
                 end
                               
-                %if getappdata(0,'merge')
+                if ~strcmp(mode,'recovery')%getappdata(0,'merge')
                     stim = mergeClient(10000);
-                %end
-                data{6,index(2)} = stim;
+                    data{6,index(2)} = stim;
+                end
                 
                 fulldata = cell(4,1);
                 output = '';
@@ -139,8 +139,13 @@ while running
         break
     end
     
-    running = getappdata(0,'running');
+    if strfind(chunk,'newfile')
+        nextfile = ['tempdata',int2str(nr_),'.txt']
+        p = getpath(nextfile,'data');
+        fid = fopen(p,'r');
+    end
     
+    running = getappdata(0,'running');
 end 
 
 % if isempty(data{1,1})
@@ -153,10 +158,10 @@ end
 
 %If merging is activated the data file should be correlated with its
 %corresponding parameter data retrieved from flyfly. 
-%if getappdata(0,'merge')
+if ~strcmp(mode,'recovery')%getappdata(0,'merge')
     data = corrData(data);
-%end
-data = reformatData(data);
+    data = reformatData(data);
+end
 
 %If recording was aborted before data could be recorded fid is NaN
 if ~isnan(fid) 

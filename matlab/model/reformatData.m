@@ -7,31 +7,34 @@ size_ = size(data);
 
 %Iterate over each block in the data file
 for k=1:size_(2)
-    
-    %% If the block is empty there is no need to reformat
+
     if ~isempty(data{1,k})
-        data_time = data{4,k};
-        data_forward = data{1,k};
-        data_ss = data{2,k};
-        data_yaw = data{3,k};
-        param = data{6,k};
+    %% If the block is empty there is no need to reformat
+    data_time = data{4,k};
+    data_forward = data{1,k};
+    data_ss = data{2,k};
+    data_yaw = data{3,k};
+    param = data{6,k};
 
-        %%Find stimuli time
-        tempSize = size(param.stim.layers);
-        numLayers = tempSize(2);
+    %%Find stimuli time
+    tempSize = size(param.stim.layers);
+    numLayers = tempSize(2);
 
-        tempSize = size(param.stim.layers(1).Param);
-        numTrials = tempSize(2);
+    tempSize = size(param.stim.layers(1).Param);
+    numTrials = tempSize(2);
 
-        totTime = 0;
-
-        %% Find total stimuli time by adding pre-, post- and stimtime
-        %% thogether and use the layer with the longest one as that is what
-        %% defines the length of the trial
+    totTime = 0;
+    
+    %% Find total stimuli time by adding pre-, post- and stimtime
+    %% thogether and use the layer with the longest one as that is what
+    %% defines the length of the trial
         for i=1:numLayers
+            tempTime = 0;
+            
             for j=1:numTrials
-                tempTime = param.stim.layers(i).Param(j).Time+param.stim.layers(i).Param(j).PreStimTime+param.stim.layers(i).Param(j).PostStimTime;
+                tempTime = tempTime + param.stim.layers(i).Param(j).Time+param.stim.layers(i).Param(j).PreStimTime+param.stim.layers(i).Param(j).PostStimTime;
             end
+            
             if tempTime > totTime
                 totTime = tempTime;
             end
@@ -40,7 +43,7 @@ for k=1:size_(2)
         %Convert from frames/s to ms
         frameRate = data{6,k}.debug.screenData.hz-1;
         stimuli_time = ceil(totTime*1000/frameRate);
-
+    
         %% zeros-vectors creation based on stimuli time
         time_vector = zeros(1,stimuli_time);
         forward = zeros(1,stimuli_time);
@@ -69,6 +72,10 @@ for k=1:size_(2)
         end
 
         %% Update the data
+        if stimuli_time ~= length(forward)
+            fprintf(2,'Vector length too long, something is wrong!!!\n');
+        end
+        
         data{1,k} = forward;
         data{2,k} = ss;
         data{3,k} = yaw;

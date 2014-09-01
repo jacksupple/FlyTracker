@@ -1,12 +1,4 @@
-#xinput reattach 11
-#xinput reattach 12
-#xinput reattach 13
-#xinput reattach 14
-#xinput remove-master 16
-
-xinput create-master Second
-
-xinput reattach 11 16
-xinput reattach 12 16
-xinput reattach 13 16
-xinput reattach 14 16
+xinput set-prop 11 "Device Enabled" 0
+xinput set-prop 12 "Device Enabled" 0
+xinput set-prop 13 "Device Enabled" 0
+xinput set-prop 14 "Device Enabled" 0

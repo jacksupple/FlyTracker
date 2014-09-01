@@ -215,7 +215,6 @@ function stop_btn_KeyPressFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     if strcmp(eventdata.Key,'return')
         stopAction(handles);
-            
     end
     
 % --------------------------------------------------------------------

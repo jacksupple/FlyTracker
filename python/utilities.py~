@@ -76,6 +76,3 @@ class Utilities:
 			return path_pipe
 		elif arg == 'data':
 			return path_data
-
-
-

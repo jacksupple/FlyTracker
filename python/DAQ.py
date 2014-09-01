@@ -72,6 +72,7 @@ class MouseHandler(threading.Thread):
 					counter += 1
 				else:
 					temporary['t'] = int(round((time.time()-self.start_)*10000))
+					
 					utilities.FileHandler.saveToFile(temporary,'tempdata.txt','append')
 					temporary = {"x_1":0,"y_1":0,"x_2":0,"y_2":0}
 					counter = 0
