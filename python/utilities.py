@@ -17,7 +17,7 @@ class FileHandler:
 
 	def __init__(self,filename):
 		
-		self.currentFile = path_temp = filename
+		self.currentFile = path_temp + filename
 		self.fileCounter = 1
 
 	def saveToFileRes(self,toSave):
@@ -27,8 +27,13 @@ class FileHandler:
 		#fname = path_temp+fileName
 		
 		try:		
-			if os.path.getsize(fname) > 500000:			
- 				FileHandler.saveToFile('newfile',self.currentFile,'append')
+			if os.path.getsize(self.currentFile) > 1000000:			
+ 				#FileHandler.saveToFile('newfile',self.currentFile,'append')
+				
+				f = open(self.currentFile,'append')
+				f.write('newfile')				
+				
+			
 				idx = self.currentFile.find('.')
 
 				predot = self.currentFile[0:idx-1]

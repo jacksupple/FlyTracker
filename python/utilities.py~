@@ -17,26 +17,24 @@ class FileHandler:
 
 	def __init__(self,filename):
 		
-		self.currentFile = filename
+		self.currentFile = path_temp + filename
 		self.fileCounter = 1
 
 	def saveToFileRes(self,toSave):
 		global path_temp
 
-		fileName = self.currentFile
-		fname = path_temp+fileName
+		#fileName = self.currentFile
+		#fname = path_temp+fileName
 		
 		try:		
-			if os.path.getsize(fname) > 1000000:			
- 				FileHandler.saveToFile('newfile',fileName,'append')
-				idx = fname.find('.')
+			if os.path.getsize(self.currentFile) > 1000000:			
+ 				FileHandler.saveToFile('newfile',self.currentFile,'append')
+				idx = self.currentFile.find('.')
 
-				predot = fname[0:idx-1]
-				postdot = fname[idx:len(fname)]
+				predot = self.currentFile[0:idx-1]
+				postdot = self.currentFile[idx:len(self.currentFile)]
 			
-				fname = predot+str(self.fileCounter)+postdot
-
-				self.currentFile = fname
+				self.currentFile = predot+str(self.fileCounter)+postdot
 
 				self.fileCounter += 1
 				
@@ -45,15 +43,15 @@ class FileHandler:
 			pass
 
 		finally:
-			temp = fileName.find('.')
-			predot = fileName[0:temp-1]
-			temp = self.currentFile.find(predot)
-			self.currentFile = self.currentFile[temp:len(self.currentFile)]
+			#temp = fileName.find('.')
+			#predot = fileName[0:temp-1]
+			#temp = self.currentFile.find(predot)
+			#self.currentFile = self.currentFile[temp:len(self.currentFile)]
 			
 			#FileHandler.saveToFile(toSave,self.currentFile,'append')
 			
 			try:
-				f = open(path_temp+self.currentFile,'append')
+				f = open(self.currentFile,'append')
 				output = json.dumps(toSave)+'\n'
 				f.write(output)
 	

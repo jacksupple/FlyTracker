@@ -135,7 +135,7 @@ function run_btn_Callback(hObject, eventdata, handles)
         reset_menu_item_Callback(hObject, eventdata, handles);
         
         fpath = getpath('tempdata','data');
-        mkdir(fpath);
+        %mkdir(fpath);
         
         %reset_menu_item_Callback(hObject, eventdata, handles);
         if ~strcmp(config.pwd,'') && isempty(getappdata(0,'pass'))

@@ -32,7 +32,7 @@ class MouseHandler(threading.Thread):
 		self.s1 = SensorMouse("sensor1",self.mouseIDs["sensor1"],self)
 		self.s2 = SensorMouse("sensor2",self.mouseIDs["sensor2"],self)
 		
-		self.fileHandler_ = utilities.FileHandler('tempdata0.txt')		
+		#self.fileHandler_ = utilities.FileHandler('tempdata0.txt')		
 
 		super(MouseHandler,self).__init__()
 		
