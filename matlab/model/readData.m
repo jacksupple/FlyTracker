@@ -21,8 +21,8 @@ newBlock = false;
 nr_ = 1;
 
 output = '';
-%p = getpath('tempdata.txt','data');
-p = getpath('tempdata/tempdata0.txt','data');
+p = getpath('tempdata.txt','data');
+%p = getpath('tempdata/tempdata0.txt','data');
 
 %Init data cells
 fulldata = cell(4,1);
@@ -175,7 +175,7 @@ if ~isnan(fid)
     fclose(fid);
     
     %Fetch and save block starting times
-    fid = fopen(getpath('tempdata/blocktime.txt','data'),'r');
+    fid = fopen(getpath('blocktime.txt','data'),'r');
     
     size_ = size(data);
     blocks = size_(2);
@@ -214,7 +214,8 @@ end
 
 delete(getpath('blocktime.txt','data'));
 delete(getpath('tempdata.txt','data'));
-rmdir(getpath('tempdata','data'));
+%rmdir(getpath('tempdata','data'));
+
 t_ = toc;
 
 ['Elapsed recording time is ',num2str(t_),' seconds']

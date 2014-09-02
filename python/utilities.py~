@@ -21,10 +21,10 @@ class FileHandler:
 		self.fileCounter = 1
 
 	def saveToFileRes(self,toSave):
-		global path_data
+		global path_temp
 
 		fileName = self.currentFile
-		fname = path_data+fileName
+		fname = path_temp+fileName
 		
 		try:		
 			if os.path.getsize(fname) > 1000000:			
@@ -50,7 +50,15 @@ class FileHandler:
 			temp = self.currentFile.find(predot)
 			self.currentFile = self.currentFile[temp:len(self.currentFile)]
 			
-			FileHandler.saveToFile(toSave,self.currentFile,'append')
+			#FileHandler.saveToFile(toSave,self.currentFile,'append')
+			
+			try:
+				f = open(path_temp+self.currentFile,'append')
+				output = json.dumps(toSave)+'\n'
+				f.write(output)
+	
+			except IOError:
+				FileHandler.logException('Tried to save to: '+path_temp+self.currentFile)	
 
 	#Method for saving to file, the object to save is converted into a
 	#json-string that is then saved to file. To retrieve it it needs to be 
