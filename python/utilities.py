@@ -10,10 +10,59 @@ path = '/home/kristian/' #set to location of FlyTracker folder
 
 path_pipe = path+'FlyTracker/data/pipe'
 path_data = path+'FlyTracker/data/'
+path_temp = path+'FlyTracker/data/tempdata/'
 
 #Class for file input/output handling
 class FileHandler:
+
+	def __init__(self,filename):
+		
+		self.currentFile = filename
+		self.fileCounter = 1
+
+	def saveToFileRes(self,toSave):
+		global path_temp
+
+		fileName = self.currentFile
+		fname = path_temp+fileName
+		
+		try:		
+			if os.path.getsize(fname) > 1000000:			
+ 				FileHandler.saveToFile('newfile',fileName,'append')
+				idx = fname.find('.')
+
+				predot = fname[0:idx-1]
+				postdot = fname[idx:len(fname)]
+			
+				fname = predot+str(self.fileCounter)+postdot
+
+				self.currentFile = fname
+
+				self.fileCounter += 1
+				
+
+		except OSError:
+			pass
+
+		finally:
+			temp = fileName.find('.')
+			predot = fileName[0:temp-1]
+			temp = self.currentFile.find(predot)
+			self.currentFile = self.currentFile[temp:len(self.currentFile)]
+			
+			#FileHandler.saveToFile(toSave,self.currentFile,'append')
+			
+			for arg in args:
+			e = arg		
+			
+			try:
+				f = open(path_temp+fileName,'append')
+				output = json.dumps(toSave)+'\n'
+				f.write(output)
 	
+			except IOError:
+				FileHandler.logException("Couldnt save to file")	
+
 	#Method for saving to file, the object to save is converted into a
 	#json-string that is then saved to file. To retrieve it it needs to be 
 	#converted back to object form using json.loads()
@@ -21,19 +70,7 @@ class FileHandler:
 	def saveToFile(toSave,fileName,*args):
 		e = 'w'
 		global path_data
-		fname = path_data+fileName		
-		
-		filecounter = 1
 
-		#while os.path.getsize(fname) > 2000000:
-		#	idx = temp.find('.')
-
-		#	predot = fname[0:idx-1]
-		#	postdot = fname[idx:len(fname)]
-			
-		#	fname = predot+str(filecounter)+postdot
-		
-		
 		for arg in args:
 			e = arg		
 			

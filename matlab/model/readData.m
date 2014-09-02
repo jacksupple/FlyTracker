@@ -18,9 +18,11 @@ running = true;
 setappdata(0,'running',running);
 size_ = [0,1];
 newBlock = false;
+nr_ = 1;
 
 output = '';
-p = getpath('tempdata.txt','data');
+%p = getpath('tempdata.txt','data');
+p = getpath('tempdata/tempdata0.txt','data');
 
 %Init data cells
 fulldata = cell(4,1);
@@ -28,7 +30,8 @@ data = cell(6,1);
 
 while ~exist(p,'file') && running
     running = getappdata(0,'running');
-    %Pause to be able to listen for stop-btn as matlab lacks threading
+    
+    %Pause to be able to listen for stop-btn
     pause(.001);
 end
 
@@ -115,6 +118,16 @@ while running
             pause(0.001);
         end
         
+        if strfind(chunk,'newfile')
+            nextfile = ['tempdata/tempdata',int2str(nr_),'.txt'];
+            p = getpath(nextfile,'data');
+            
+            if exist(p,'file')
+                fid = fopen(p,'r');
+                nr_ = nr_ + 1;
+            end
+        end
+        
         if strcmp(mode,'recovery') & chunk == -1
             running = false;
             setappdata(0,'running',running);
@@ -137,12 +150,6 @@ while running
     
     if strfind(chunk,'kill')
         break
-    end
-    
-    if strfind(chunk,'newfile')
-        nextfile = ['tempdata',int2str(nr_),'.txt']
-        p = getpath(nextfile,'data');
-        fid = fopen(p,'r');
     end
     
     running = getappdata(0,'running');
@@ -168,7 +175,7 @@ if ~isnan(fid)
     fclose(fid);
     
     %Fetch and save block starting times
-    fid = fopen(getpath('blocktime.txt','data'),'r');
+    fid = fopen(getpath('tempdata/blocktime.txt','data'),'r');
     
     size_ = size(data);
     blocks = size_(2);
@@ -207,7 +214,7 @@ end
 
 delete(getpath('blocktime.txt','data'));
 delete(getpath('tempdata.txt','data'));
-
+rmdir(getpath('tempdata','data'));
 t_ = toc;
 
 ['Elapsed recording time is ',num2str(t_),' seconds']

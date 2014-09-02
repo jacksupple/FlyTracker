@@ -1,0 +1,1 @@
+{"sensor1": 0, "sensor2": 1, "mouse": 2}
