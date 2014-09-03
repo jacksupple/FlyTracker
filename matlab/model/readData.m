@@ -70,7 +70,7 @@ while running
                     data{j,index(2)+1} = [];
                 end
                               
-                if ~strcmp(mode,'recovery')%getappdata(0,'merge')
+                if ~strcmp(mode,'recovery') && get(handles.cbmerge,'value')
                     stim = mergeClient(10000);
                     data{6,index(2)} = stim;
                 end
@@ -145,7 +145,7 @@ while running
     size_ = size(data);
     
     if ~strcmp(mode,'calibration')
-        displaydata(fulldata,handles,size_,1,freq);
+        displaydata(fulldata,handles,1,freq,'noteven');
     end
     
     if strfind(chunk,'kill')
@@ -165,7 +165,7 @@ end
 
 %If merging is activated the data file should be correlated with its
 %corresponding parameter data retrieved from flyfly. 
-if ~strcmp(mode,'recovery')%getappdata(0,'merge')
+if ~strcmp(mode,'recovery') && getappdata(0,'merge')
     data = corrData(data);
     data = reformatData(data);
 end

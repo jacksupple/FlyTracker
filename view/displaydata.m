@@ -1,6 +1,13 @@
-function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
+function [] = displaydata(data,handles,toPlot,nrDatapoints, mode)
 %DISPLAYDATA Function that displays the data which is provided as input to
-%the function. Assumes that there are axes-handles. 
+%the function. Assumes that there are axes-handles.
+%Data - the cell containing the data to be plotted
+%handles - The handle of the main window, used for plotting in the correct
+%place
+%toPlot - Blocknumber to be plotted
+%nrDataPoints - Number of datapoints in the block to be plotted
+%mode - Format on the data determines how the data is plotted, either
+%against index or against time vector
 
 
     config = getappdata(0,'config');
@@ -30,7 +37,11 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
     end
 
     %Plot for forward velocity, time x.001 to convert it to seconds
-    block = blocksize(2);
+    %block = blocksize(2);
+    
+    size_ = size(data);
+    block = size_(2);
+    
     %plot(handles.axes1,.001.*fulldata{4,1},fulldata{config.forwardAxis,1});
     
     if length(fulldata{4,1}) > nrDatapoints
@@ -47,53 +58,109 @@ function [] = displaydata(data,handles,blocksize,toPlot,nrDatapoints)
         y3 = fulldata{3,1};
     end    
     
-    plot(handles.axes1,.001.*x_,y1);
-    title_ = strcat('Block',' ',num2str(block),': forward position');
-    title(handles.axes1,title_);
-    axis(handles.axes1,'auto');
-    hold(handles.axes1,'on');
-    
-    
-    %Plot for sideway velocity, time x.001 to convert it to seconds
-    plot(handles.axes2,.001.*x_,y2);
-    title_ = strcat('Block',' ',num2str(1),': sideway position');
-    title(handles.axes2,title_);
-    axis(handles.axes2,'auto');
-    hold(handles.axes2,'on');
-    
-    %Plot for yaw velocity, time x.001 to convert it to seconds
-    plot(handles.axes3,.001.*x_,y3);
-    title_ = strcat('Block',' ',num2str(block),': angle position');
-    title(handles.axes3,title_);
-    axis(handles.axes3,'auto');
-    
-    hold(handles.axes3,'on');
-    
-    if ~isempty(fulldata{1,1})
+    %Plot against time vector if data is not yet reformatted such that the
+    %time interval between data points is even, else just plota against
+    %index (which corresponds to one ms
+    if strcmp(mode,'evendata')
+        plot(handles.axes1,y1);
+%         title_ = strcat('Block',' ',num2str(block),': forward position');
+%         title(handles.axes1,title_);
+%         axis(handles.axes1,'auto');
+%         hold(handles.axes1,'on');
         
-        plot(handles.axes4,x,y);
-        title(handles.axes4,'2D-map');
-        xlabel(handles.axes4,'Forward position (mm)');
-        ylabel(handles.axes4,'Sideway position (mm)');
         
-        min_ = min(min(x),min(y));
-        max_ = max(max(x),max(y));
+        %Plot for sideway velocity, time x.001 to convert it to seconds
+        plot(handles.axes2,y2);
+%         title_ = strcat('Block',' ',num2str(1),': sideway position');
+%         title(handles.axes2,title_);
+%         axis(handles.axes2,'auto');
+%         hold(handles.axes2,'on');
         
-        if ~isnan(min_) & ~isnan(max_) & min_ < max_ 
-            axis([min_ max_ min_ max_]);
-            axis square;
-        end
-    end
-    
-    if strcmp(vel,'on')
-        titles = {'Forward velocity','Sideway velocity','Yaw velocity'};
-        y_axis = {'Velocity (m/s)','Velocity (m/s)','Velocity (degrees/s)'};
-        setplotdescription(handles,titles,y_axis);
+        %Plot for yaw velocity, time x.001 to convert it to seconds
+        plot(handles.axes3,y3);
+%         title_ = strcat('Block',' ',num2str(block),': angle position');
+%         title(handles.axes3,title_);
+%         axis(handles.axes3,'auto');
+        
+%         hold(handles.axes3,'on');
+        
+%         if ~isempty(fulldata{1,1})
+%             
+%             plot(handles.axes4,x,y);
+%             title(handles.axes4,'2D-map');
+%             xlabel(handles.axes4,'Forward position (mm)');
+%             ylabel(handles.axes4,'Sideway position (mm)');
+%             
+%             min_ = min(min(x),min(y));
+%             max_ = max(max(x),max(y));
+%             
+%             if ~isnan(min_) & ~isnan(max_) & min_ < max_
+%                 axis([min_ max_ min_ max_]);
+%                 axis square;
+%             end
+%         end
+        
+%         if strcmp(vel,'on')
+%             titles = {'Forward velocity','Sideway velocity','Yaw velocity'};
+%             y_axis = {'Velocity (m/s)','Velocity (m/s)','Velocity (degrees/s)'};
+%             setplotdescription(handles,titles,y_axis);
+%         else
+%             titles = {'Forward position','Sideway position','Yaw position'};
+%             y_axis = {'Position (mm)','Position (mm)','Position (degrees)'};
+%             setplotdescription(handles,titles,y_axis);
+%         end
     else
-        titles = {'Forward position','Sideway position','Yaw position'};
-        y_axis = {'Position (mm)','Position (mm)','Position (degrees)'};
-        setplotdescription(handles,titles,y_axis);
+        plot(handles.axes1,.001.*x_,y1);
+        
+        %Plot for sideway velocity, time x.001 to convert it to seconds
+        plot(handles.axes2,.001.*x_,y2);
+        
+        %Plot for yaw velocity, time x.001 to convert it to seconds
+        plot(handles.axes3,.001.*x_,y3);
     end
-  
+    
+        title_ = strcat('Block',' ',num2str(block),': forward position');
+        title(handles.axes1,title_);
+        axis(handles.axes1,'auto');
+        hold(handles.axes1,'on');
+        
+        
+        title_ = strcat('Block',' ',num2str(1),': sideway position');
+        title(handles.axes2,title_);
+        axis(handles.axes2,'auto');
+        hold(handles.axes2,'on');
+        
+        title_ = strcat('Block',' ',num2str(block),': angle position');
+        title(handles.axes3,title_);
+        axis(handles.axes3,'auto');
+        
+        hold(handles.axes3,'on');
+        
+        if ~isempty(fulldata{1,1})
+            
+            plot(handles.axes4,x,y);
+            title(handles.axes4,'2D-map');
+            xlabel(handles.axes4,'Forward position (mm)');
+            ylabel(handles.axes4,'Sideway position (mm)');
+            
+            min_ = min(min(x),min(y));
+            max_ = max(max(x),max(y));
+            
+            if ~isnan(min_) & ~isnan(max_) & min_ < max_
+                axis([min_ max_ min_ max_]);
+                axis square;
+            end
+        end
+        
+        if strcmp(vel,'on')
+            titles = {'Forward velocity','Sideway velocity','Yaw velocity'};
+            y_axis = {'Velocity (m/s)','Velocity (m/s)','Velocity (degrees/s)'};
+            setplotdescription(handles,titles,y_axis);
+        else
+            titles = {'Forward position','Sideway position','Yaw position'};
+            y_axis = {'Position (mm)','Position (mm)','Position (degrees)'};
+            setplotdescription(handles,titles,y_axis);
+        end
+        
 end
     

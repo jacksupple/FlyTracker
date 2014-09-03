@@ -65,6 +65,8 @@ guidata(hObject, handles);
 config = getappdata(0,'config')
 
 set(handles.timer_edt,'String',config.time);
+set(handles.cbmerge,'value',1);
+setappdata(0,'merge',true);
 
 if strcmp(config.trigger,'network')
     set(handles.network_rdbtn,'value',1);
@@ -95,6 +97,7 @@ if exist(getpath('tempdata.txt','data'),'file')
         filename = strcat(config.savepath,'/recovereddata_',int2str(c(1)),'_',int2str(c(2)),'_',int2str(c(3)),'_',int2str(c(4)),'_',int2str(c(5)),'_',int2str(c(6)),'.mat');
         readData(handles,filename,'recovery');
     end
+    
     delete(getpath('tempdata.txt','data'));
     delete(getpath('blocktime.txt','data'));
 end
@@ -557,7 +560,7 @@ function pop_Callback(hObject, eventdata, handles)
     if ~isempty(fulldata)
         block = get(handles.pop,'Value');
         size_ = size(fulldata);
-        displaydata(fulldata,handles,size_,block,length(fulldata{4,block}));    
+        displaydata(fulldata,handles,block,length(fulldata{4,block}),'evendata');    
     end
     
 % --- Executes during object creation, after setting all properties.

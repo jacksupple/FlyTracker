@@ -68,6 +68,9 @@ function [message] = mergeClient(port)
         end
     end
     
+    %Converting the byte array to a nested matlab struct
     message = deserialize(transpose(message));
+    
+    %Display so the user know when deserialzation is done
     disp(message);
 end
