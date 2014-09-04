@@ -28,20 +28,37 @@ for k=1:size_(2)
     %% Find total stimuli time by adding pre-, post- and stimtime
     %% thogether and use the layer with the longest one as that is what
     %% defines the length of the trial
-        for i=1:numLayers
-            tempTime = 0;
-            
-            for j=1:numTrials
-                tempTime = tempTime + param.stim.layers(i).Param(j).Time+param.stim.layers(i).Param(j).PreStimTime+param.stim.layers(i).Param(j).PostStimTime;
-            end
-            
-            if tempTime > totTime
-                totTime = tempTime;
-            end
-        end
+%         for i=1:numLayers
+%             tempTime = 0;
+%             
+%             for j=1:numTrials
+%                 tempTime = tempTime + param.stim.layers(i).Param(j).Time+param.stim.layers(i).Param(j).PreStimTime+param.stim.layers(i).Param(j).PostStimTime;
+%             end
+%             
+%             if tempTime > totTime
+%                 totTime = tempTime;
+%             end
+%         end
 
+        for i=1:numTrials
+            trialTime = 0;
+            
+            for j=1:numLayers
+                tempTime = 0;
+                tempParam = param.stim.layers(j).Param(i);
+                tempTime = tempParam.Time+tempParam.PreStimTime+tempParam.PostStimTime;
+                
+                if tempTime > trialTime
+                    trialTime = tempTime;
+                end
+            end
+            
+            totTime = totTime+trialTime;
+        end
+        
         %Convert from frames/s to ms
         frameRate = data{6,k}.debug.screenData.hz-1;
+        %totTime = totTime+500;
         stimuli_time = ceil(totTime*1000/frameRate);
     
         %% zeros-vectors creation based on stimuli time
@@ -74,6 +91,8 @@ for k=1:size_(2)
         %% Update the data
         if stimuli_time ~= length(forward)
             fprintf(2,'Vector length too long, something is wrong!!!\n');
+            disp(stimuli_time);
+            disp(length(forward));
         end
         
         data{1,k} = forward;

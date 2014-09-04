@@ -57,12 +57,12 @@ while running
             [~,temp] = calcdata(output,mode);
             newBlock = true;
             
-            if cumsum(fulldata{1,1}) == 0 | cumsum(fulldata{2,1}) == 0
-                errordlg('One of the sensors did not record any data so the current block was not saved');
-                for i=1:4
-                    data{i,1} = [0];
-                end
-            else
+            %if cumsum(fulldata{1,1}) == 0 | cumsum(fulldata{2,1}) == 0
+            %    errordlg('One of the sensors did not record any data so the current block was not saved');
+            %    for i=1:4
+            %        data{i,1} = [0];
+            %    end
+            %else
                 index = size(data);
                 
                 for j=1:4
@@ -77,18 +77,18 @@ while running
                 
                 fulldata = cell(4,1);
                 output = '';
-            end
+            %end
             break;
         elseif strfind(chunk,'pause')
             [~,temp] = calcdata(output,mode);
             newBlock = true;
             
-            if cumsum(fulldata{1,1}) == 0 | cumsum(fulldata{2,1}) == 0
-                errordlg('One of the sensors did not record any data so the current block was not saved');
-                for i=1:4
-                    data{i,1} = [0];
-                end
-            else
+%             if cumsum(fulldata{1,1}) == 0 | cumsum(fulldata{2,1}) == 0
+%                 errordlg('One of the sensors did not record any data so the current block was not saved');
+%                 for i=1:4
+%                     data{i,1} = [0];
+%                 end
+%             else
                 index = size(data);
                 
                 for j=1:4
@@ -98,7 +98,7 @@ while running
                               
                 fulldata = cell(4,1);
                 output = '';
-            end
+%            end
             break;
         end
             
