@@ -39,6 +39,23 @@ if exist(p,'file')
     fid = fopen(p,'r');
 end
 
+if strcmp('recovery',mode)
+    n = 0;
+    tline = fgetl(fid);
+    
+    while ischar(tline)
+        tline = fgetl(fid);
+        n = n+1;
+    end
+    
+    fclose(fid);
+    fid = fopen(p,'r');
+    
+    waitbar_ = waitbar(0,'Please wait...');
+    steps = n;
+    step = 0;
+end
+
 while running
     
     output = '';
@@ -73,6 +90,7 @@ while running
                 if ~strcmp(mode,'recovery') && get(handles.cbmerge,'value')
                     stim = mergeClient(10000);
                     data{6,index(2)} = stim;
+                    
                 end
                 
                 fulldata = cell(4,1);
@@ -136,6 +154,16 @@ while running
         
     [~,temp] = calcdata(output,mode);   
     
+    
+    if strcmp('recovery',mode)
+        close(waitbar_);
+        waitbar_ = waitbar(0,'Please wait...');
+        step = step+freq;
+        if step < steps
+            waitbar(step/steps,waitbar_);
+        end
+    end
+    
     fulldata{1,1} = [fulldata{1,1},temp{1,1}];
     fulldata{2,1} = [fulldata{2,1},temp{2,1}];
     fulldata{3,1} = [fulldata{3,1},temp{3,1}];
@@ -165,9 +193,15 @@ end
 
 %If merging is activated the data file should be correlated with its
 %corresponding parameter data retrieved from flyfly. 
-if ~strcmp(mode,'recovery') && getappdata(0,'merge')
-    data = corrData(data);
-    data = reformatData(data);
+if ~strcmp(mode,'recovery') 
+    
+    if getappdata(0,'merge')
+        data = corrData(data);
+        data = reformatData(data);
+    end
+    
+else
+    close(waitbar_);    
 end
 
 %If recording was aborted before data could be recorded fid is NaN
