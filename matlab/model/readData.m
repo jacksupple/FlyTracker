@@ -156,8 +156,8 @@ while running
     
     
     if strcmp('recovery',mode)
-        close(waitbar_);
-        waitbar_ = waitbar(0,'Please wait...');
+        %close(waitbar_);
+        %waitbar_ = waitbar(0,'Please wait...');
         step = step+freq;
         if step < steps
             waitbar(step/steps,waitbar_);

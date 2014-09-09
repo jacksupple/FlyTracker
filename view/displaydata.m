@@ -147,8 +147,8 @@ function [] = displaydata(data,handles,toPlot,nrDatapoints, mode)
             max_ = max(max(x),max(y));
             
             if ~isnan(min_) & ~isnan(max_) & min_ < max_
-                axis([min_ max_ min_ max_]);
-                axis square;
+                axis(handles.axes4,[min_ max_ min_ max_]);
+                axis(handles.axes4,'square');
             end
         end
         
