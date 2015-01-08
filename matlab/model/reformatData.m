@@ -58,7 +58,7 @@ for k=1:size_(2)
         
         %Convert from frames/s to ms
         frameRate = data{6,k}.debug.screenData.hz-1;
-        %totTime = totTime+500;
+        totTime = totTime+500;
         stimuli_time = ceil(totTime*1000/frameRate);
     
         %% zeros-vectors creation based on stimuli time
@@ -81,7 +81,6 @@ for k=1:size_(2)
             forward(round(data_time(counter))+1) = data_forward(2:length(data_forward)); %put a forward position in a right place in forward vector
             ss(round(data_time(counter))+1) = data_ss(2:length(data_ss)); %put a ss position in a right place in forward vector
             yaw(round(data_time(counter))+1) = data_yaw(2:length(data_yaw)); %put a yaw position in a right place in forward vector
-
         else 
             forward(round(data_time(counter))+1) = data_forward;
             ss(round(data_time(counter))+1) = data_ss;
