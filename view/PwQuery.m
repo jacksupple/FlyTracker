@@ -1,4 +1,7 @@
 function varargout = PwQuery(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PWQUERY MATLAB code for PwQuery.fig
 %      PWQUERY, by itself, creates a new PWQUERY or raises the existing
 %      singleton*.

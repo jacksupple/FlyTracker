@@ -1,4 +1,7 @@
 function varargout = MainApp(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MAINAPP MATLAB code for MainApp.fig
 %      MAINAPP, by itself, creates a new MAINAPP or raises the existing
 %      singleton*.

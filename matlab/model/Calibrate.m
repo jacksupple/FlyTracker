@@ -1,4 +1,7 @@
 classdef Calibrate
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %CALIBRATION class - object that encapsulates calibration data and
     %perform necessary calculations on these.
     

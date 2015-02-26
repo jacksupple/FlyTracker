@@ -28,7 +28,12 @@ class FileHandler:
 		
 		try:		
 			if os.path.getsize(self.currentFile) > 1000000:			
- 				FileHandler.saveToFile('newfile',self.currentFile,'append')
+ 				#FileHandler.saveToFile('newfile',self.currentFile,'append')
+				
+				f = open(self.currentFile,'append')
+				f.write('newfile')				
+				
+			
 				idx = self.currentFile.find('.')
 
 				predot = self.currentFile[0:idx-1]

@@ -1,5 +1,8 @@
 classdef Configuration < handle
-    %Configuration class, object that holds all information that needs to
+   %Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %Configuration class, object that holds all information that needs to
     %be stored between sessions but in particular all calibration values.
     
     properties (GetAccess = 'public',SetAccess = 'private')

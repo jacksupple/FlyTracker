@@ -1,4 +1,7 @@
 function varargout = MiceSetup(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MICESETUP MATLAB code for MiceSetup.fig
 %      MICESETUP, by itself, creates a new MICESETUP or raises the existing
 %      singleton*.

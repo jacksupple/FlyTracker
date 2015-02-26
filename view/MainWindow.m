@@ -1,4 +1,7 @@
 function varargout = MainWindow(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MAINWINDOW MATLAB code for MainWindow.fig
 %      MAINWINDOW, by itself, creates a new MAINWINDOW or raises the existing
 %      singleton*.

@@ -1,4 +1,6 @@
 function [path] = getpath(file,folder)
+%%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%%Spring 2014
 %Returns correct path for given file and type, only the relative paths are
 %hardcoded because they are not subjects of change
 

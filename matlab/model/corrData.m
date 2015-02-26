@@ -1,4 +1,7 @@
 function [data] = corrData(data)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Function for correlating blocks of data to the corresponding parameter
 %file. The function is dependent on the flyfly implmentation of the visual
 %parameters. 

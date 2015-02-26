@@ -1,4 +1,7 @@
 function [data] = reformatData(data)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Reformats the data such data the time interval between each datapoint is
 %Reformats the data such data the time intervall between each datapoint is
 %made equal

@@ -1,4 +1,7 @@
 function varargout = SetupSettings(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SETUPSETTINGS MATLAB code for SetupSettings.fig
 %      SETUPSETTINGS, by itself, creates a new SETUPSETTINGS or raises the existing
 %      singleton*.

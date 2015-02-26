@@ -1,4 +1,7 @@
 function varargout = host(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HOST MATLAB code for host.fig
 %      HOST, by itself, creates a new HOST or raises the existing
 %      singleton*.

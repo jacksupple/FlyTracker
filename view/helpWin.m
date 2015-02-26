@@ -1,4 +1,7 @@
 function varargout = help(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HELP MATLAB code for help.fig
 %      HELP, by itself, creates a new HELP or raises the existing
 %      singleton*.

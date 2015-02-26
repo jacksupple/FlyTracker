@@ -1,4 +1,7 @@
 function [data] = readData(handles,filename, mode)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %READDATA
 %Reads data from temporary data files and store it in appropriate manner.
 %The handles sent with it is that of the GUI so data also can be plotted in

@@ -1,4 +1,6 @@
 function [] = flytracker()
+%%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%%Spring 2014
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 

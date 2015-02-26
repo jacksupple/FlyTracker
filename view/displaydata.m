@@ -1,4 +1,7 @@
 function [] = displaydata(data,handles,toPlot,nrDatapoints, mode)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %DISPLAYDATA Function that displays the data which is provided as input to
 %the function. Assumes that there are axes-handles.
 %Data - the cell containing the data to be plotted

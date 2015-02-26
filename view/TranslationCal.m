@@ -1,4 +1,7 @@
 function varargout = TranslationCal(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TRANSLATIONCAL MATLAB code for TranslationCal.fig
 %      TRANSLATIONCAL, by itself, creates a new TRANSLATIONCAL or raises the existing
 %      singleton*.

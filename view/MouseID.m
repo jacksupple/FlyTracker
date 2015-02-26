@@ -1,4 +1,7 @@
 function varargout = MouseID(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MOUSEID MATLAB code for MouseID.fig
 %      MOUSEID, by itself, creates a new MOUSEID or raises the existing
 %      singleton*.

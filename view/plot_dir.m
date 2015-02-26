@@ -1,4 +1,7 @@
 function [h1, h2] = plot_dir (axes_,vX, vY)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %function [h1, h2] = plot_dir (vX, vY)
 %Plotting x-y variables with direction indicating vector to the next element.
 %Example

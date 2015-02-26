@@ -15,6 +15,7 @@ def idMouse():
 		mice.append(m)		
 
 	run = True	
+	
 	while run:
 		for mouse_ in mice:
 			if mouse_.id != -1:

@@ -1,4 +1,7 @@
 function [ valid ] = validateConfigObject(config)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Function that validates the config object to make sure that all necessary
 %fields are set and that all values are within in their domain. This to make sure
 %that an experiment cant be run without a correct configuration

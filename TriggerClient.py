@@ -1,3 +1,5 @@
+##Creator: Kristian Johansson - kristian.johansson86@gmail.com
+##Spring 2014
 import socket
 import sys
 import traceback

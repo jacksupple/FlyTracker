@@ -1,4 +1,7 @@
 function [x,y] = calc2DPath(data,block)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CALC2DPATH Function that calculates a 2D path given delta coordinates for
 %the fly
 

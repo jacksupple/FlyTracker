@@ -1,4 +1,7 @@
 function stopAction(handles)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Function for stopping DAQ.py  
 
     setappdata(0,'running', false);

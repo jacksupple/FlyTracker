@@ -1,4 +1,7 @@
 function ip = getIPAddress()
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %Simple function for finding ip address of localhost.
     %Returns IP address as string
     

@@ -1,4 +1,7 @@
 function varargout = About(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ABOUT MATLAB code for About.fig
 %      ABOUT, by itself, creates a new ABOUT or raises the existing
 %      singleton*.

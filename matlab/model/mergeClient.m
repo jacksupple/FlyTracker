@@ -1,4 +1,7 @@
 function [message] = mergeClient(port)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %This is a client application that reads and the converts the parameter
 %data sent from flyfly. If flyfly is not used as software for generating
 %visual stimuli the following demands are set on the parameter format:

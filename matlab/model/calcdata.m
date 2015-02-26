@@ -1,4 +1,7 @@
 function [ data,concatdata ] = calcdata(output, mode_)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Function that calculates the data for for the raw mouse input. output and
 %output_time has very specific restrictions on them, see help manual for
 %this. Returns data divided into blocks and the fully concatenated data

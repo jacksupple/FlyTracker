@@ -1,4 +1,7 @@
 function [velocities] = calcVelocity(data,block)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Function that calculates velocties, by doing so the first data point is 
 %removed as there is no way of knowing when this was started
 

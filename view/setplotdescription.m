@@ -1,4 +1,7 @@
 function [] = setplotdescription(handles,titles,y_axis)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %SETPLOTDESCRIPTION
 %Function that sets the correct title and axis-labels for each plot
 %corresponding to the selected plotting

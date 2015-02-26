@@ -1,4 +1,7 @@
 function varargout = Calibration(varargin)
+%Creator: Kristian Johansson - kristian.johansson86@gmail.com
+%Spring 2014
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CALIBRATION MATLAB code for Calibration.fig
 %      CALIBRATION, by itself, creates a new CALIBRATION or raises the existing
 %      singleton*.
