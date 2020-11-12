@@ -91,5 +91,10 @@ end
     data{1,1} = forward;
     data{3,1} = (180/pi).*yaw;
     data{4,1} = times;
-    concatdata = data;   
+    concatdata = data;
+%     tcpipClient = tcpip('10.26.25.47',55001, 'NetworkRole', 'Client');
+%     set(tcpipClient, 'Timeout', 30);
+%     fopen(tcpipClient);
+%     fwrite(tcpipClient, int2str(side));
+%     fclose(tcpipClient);
 end

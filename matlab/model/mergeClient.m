@@ -13,7 +13,10 @@ function [message] = mergeClient(port)
     
     %Make sure this is the same host address as the computer that holds
     %flyfly
-    host = '130.238.33.123';
+    %Start Van edit
+    %host = '130.238.33.123';
+     host = '10.26.25.47';
+    %End Van edit
     
     number_of_retries = 20;
     retry = 0;

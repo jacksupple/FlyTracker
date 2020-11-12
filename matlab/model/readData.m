@@ -1,3 +1,191 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function [data] = readData(handles,filename, mode)
 %Creator: Kristian Johansson - kristian.johansson86@gmail.com
 %Spring 2014
@@ -58,6 +246,8 @@ if strcmp('recovery',mode)
     steps = n;
     step = 0;
 end
+%     tcpipClient = tcpip('10.26.25.47',55001, 'NetworkRole', 'Client');
+%     set(tcpipClient, 'Timeout', 30);
 
 while running
     
@@ -172,6 +362,14 @@ while running
     fulldata{3,1} = [fulldata{3,1},temp{3,1}];
     fulldata{4,1} = [fulldata{4,1},temp{4,1}];
     
+    %writes to unity
+%     fopen(tcpipClient);
+%     fwrite(tcpipClient, int2str(mean(temp{1,1})));
+%     fwrite(tcpipClient, ' ');
+%     fwrite(tcpipClient, int2str(mean(temp{2,1})));
+%     fwrite(tcpipClient, ' ');
+%     fwrite(tcpipClient, int2str(mean(temp{3,1})));
+%     fclose(tcpipClient);
     %For determining which block is being plotted
     size_ = size(data);
     
